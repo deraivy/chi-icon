@@ -13,3 +13,7 @@ export const singleProduct = async (productId) => {
 export const filterProducts = async (data) => {
   return await axiosPost("/auth/filter-products", data);
 };
+
+export const searchProduct = async (data) => {
+  return await axiosGet(`/auth/search?query=${data.query}`);
+};

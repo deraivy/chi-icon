@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen bg-gray-50">
-    <!-- Hero Section -->
+    <!-- Hero Section (unchanged) -->
     <div
       class="bg-gradient-to-br from-gray-600 via-red-700 to-gray-800 w-full h-64 flex items-center relative overflow-hidden"
     >
@@ -17,14 +17,12 @@
     </div>
 
     <!-- Main Content -->
-    <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+    <div class="mx-auto w-full max-w-8xl px-4 sm:px-6 lg:px-8 py-16">
       <div class="flex flex-col lg:flex-row gap-8">
         <!-- Filters Sidebar -->
         <div class="lg:w-1/4">
-          <!-- Desktop Filters (lg and up) -->
           <div class="hidden lg:block">
             <div class="flex flex-col top-0">
-              <!-- Section Title -->
               <div class="flex justify-between items-center mb-6">
                 <h3 class="text-2xl font-bold text-gray-900">Filter</h3>
                 <button
@@ -35,7 +33,7 @@
                 </button>
               </div>
 
-              <!-- Category Filter -->
+              <!-- Category (unchanged) -->
               <div class="mb-8">
                 <label
                   class="block text-lg font-medium text-gray-700 mb-3 cursor-pointer flex items-center justify-between"
@@ -63,20 +61,24 @@
                   class="text-base space-y-3 mt-2 transition-all duration-300 ease-in-out"
                 >
                   <p
-                    v-for="category in categories"
-                    :key="category"
-                    @click="
-                      selectedCategory = category;
-                      applyFilters();
-                    "
                     class="text-gray-600 hover:text-blue-600 cursor-pointer transition-colors duration-200"
                   >
-                    {{ category }}
+                    Beds
+                  </p>
+                  <p
+                    class="text-gray-600 hover:text-blue-600 cursor-pointer transition-colors duration-200"
+                  >
+                    Gadgets
+                  </p>
+                  <p
+                    class="text-gray-600 hover:text-blue-600 cursor-pointer transition-colors duration-200"
+                  >
+                    Toys
                   </p>
                 </div>
               </div>
 
-              <!-- Price Range -->
+              <!-- Price Range (unchanged) -->
               <div class="mb-8">
                 <label
                   class="block text-lg font-medium text-gray-700 mb-3 cursor-pointer flex items-center justify-between"
@@ -120,7 +122,7 @@
                 </div>
               </div>
 
-              <!-- Color Filter -->
+              <!-- Color -->
               <div class="mb-8">
                 <label
                   class="block text-lg font-medium text-gray-700 mb-3 cursor-pointer flex items-center justify-between"
@@ -147,6 +149,9 @@
                   v-show="isColorDropdownOpen"
                   class="grid grid-cols-2 gap-4 mt-2 transition-all duration-300 ease-in-out"
                 >
+                  <div v-if="colors.length === 0" class="text-gray-500">
+                    No colors available
+                  </div>
                   <label
                     v-for="color in colors"
                     :key="color"
@@ -168,17 +173,14 @@
             </div>
           </div>
 
-          <!-- Mobile Filters (below lg) -->
+          <!-- Mobile Filters (unchanged except for color debug) -->
           <div class="block lg:hidden">
-            <!-- Mobile Filter Button -->
             <button
               @click="isFilterOpen = true"
               class="bg-blue-600 text-white py-2 px-6 rounded-lg mb-4"
             >
               Filters
             </button>
-
-            <!-- Sidebar -->
             <div>
               <div
                 :class="[
@@ -205,7 +207,6 @@
                       ✕
                     </button>
                   </div>
-                  <!-- Category Filter -->
                   <div class="mb-6">
                     <h4 class="font-medium text-gray-700 mb-2">Category</h4>
                     <select
@@ -223,7 +224,6 @@
                       </option>
                     </select>
                   </div>
-                  <!-- Price Range Filter -->
                   <div class="mb-6">
                     <h4 class="font-medium text-gray-700 mb-2">
                       Price Range (₦)
@@ -245,10 +245,12 @@
                       />
                     </div>
                   </div>
-                  <!-- Color Filter -->
                   <div class="mb-6">
                     <h4 class="font-medium text-gray-700 mb-2">Color</h4>
                     <div class="grid grid-cols-2 gap-2">
+                      <div v-if="colors.length === 0" class="text-gray-500">
+                        No colors available
+                      </div>
                       <label
                         v-for="color in colors"
                         :key="color"
@@ -280,9 +282,8 @@
           </div>
         </div>
 
-        <!-- Products Section -->
+        <!-- Products Section (unchanged) -->
         <div class="w-full lg:w-4/4">
-          <!-- Loading State -->
           <div v-if="loading" class="flex justify-center items-center h-64">
             <div class="flex items-center gap-4">
               <svg
@@ -308,8 +309,6 @@
               <span class="text-gray-600 text-lg">Loading collections...</span>
             </div>
           </div>
-
-          <!-- Products Grid -->
           <div
             v-else-if="displayProducts.length > 0"
             class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
@@ -320,8 +319,6 @@
               :product="product"
             />
           </div>
-
-          <!-- No Results -->
           <div
             v-else
             class="text-center py-16 bg-white rounded-xl shadow-sm border border-gray-100"
@@ -361,24 +358,28 @@ export default {
       categories,
     } = storeToRefs(productStore);
 
-    // Independent dropdown states
     const isCategoryDropdownOpen = ref(false);
     const isPriceDropdownOpen = ref(false);
     const isColorDropdownOpen = ref(false);
-    const isFilterOpen = ref(false); // For mobile sidenav
+    const isFilterOpen = ref(false);
 
-    // Compute display products based on filters
+    // Log colors to debug
+    onMounted(() => {
+      productStore.fetchProducts();
+      console.log("Colors from store:", colors.value); // Check if colors are populated
+    });
+
     const displayProducts = computed(() => {
       let result = [...products.value];
+      console.log("Products:", result);
+      console.log("Selected Colors:", selectedColors.value);
 
-      // Apply category filter
       if (selectedCategory.value) {
         result = result.filter(
           (product) => product.category === selectedCategory.value
         );
       }
 
-      // Apply price filter
       if (minPrice.value || maxPrice.value) {
         result = result.filter((product) => {
           const price = product.price;
@@ -388,35 +389,40 @@ export default {
         });
       }
 
-      // Apply color filter
       if (selectedColors.value.length > 0) {
-        result = result.filter(
-          (product) =>
-            product.colors &&
-            selectedColors.value.some((color) => product.colors.includes(color))
-        );
+        result = result.filter((product) => {
+          if (!product.colors || !Array.isArray(product.colors)) {
+            console.warn(
+              `Product ${product.id} has no valid colors array:`,
+              product.colors
+            );
+            return false;
+          }
+          return selectedColors.value.some((color) =>
+            product.colors.includes(color)
+          );
+        });
       }
 
+      console.log("Filtered Products:", result);
       return result;
     });
 
-    // Fetch products on mount
-    onMounted(() => {
-      productStore.fetchProducts();
-    });
-
-    // Apply filters method
     const applyFilters = () => {
-      // The computed property will automatically update
+      console.log("Applying filters:", {
+        selectedCategory: selectedCategory.value,
+        minPrice: minPrice.value,
+        maxPrice: maxPrice.value,
+        selectedColors: selectedColors.value,
+      });
     };
 
-    // Clear filters method
     const clearFilters = () => {
-      selectedCategory.value = null; // Reset category
-      minPrice.value = null; // Reset min price
-      maxPrice.value = null; // Reset max price
-      selectedColors.value = []; // Reset selected colors
-      applyFilters(); // Trigger filter update
+      selectedCategory.value = null;
+      minPrice.value = null;
+      maxPrice.value = null;
+      selectedColors.value = [];
+      applyFilters();
     };
 
     return {

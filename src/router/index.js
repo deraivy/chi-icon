@@ -7,6 +7,7 @@ import RequestResetP from "../views/Auth/RequestResetP.vue";
 import PasswordReset from "../views/Auth/PasswordReset.vue";
 import ProductsDetails from "@/views/ProductsDetails.vue";
 import VerifyEmail from "../views/Auth/VerifyEmail.vue";
+import search from "../views/search.vue";
 
 const routes = [
   {
@@ -49,6 +50,11 @@ const routes = [
     name: "products-details",
     component: ProductsDetails,
     props: true,
+  },
+  {
+    path: "/search",
+    name: "search",
+    component: search,
   },
 ];
 
