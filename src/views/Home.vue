@@ -7,6 +7,7 @@
     class="h-[65vh] lg:h-[50vh] md:h-[45vh] sm:h-[40vh] w-full overflow-hidden"
   >
     <!-- Slide 1 -->
+    <!-- backslide -->
     <swiper-slide class="bg-gray-700 text-white relative">
       <!-- Background Image for Small Screens -->
       <div
