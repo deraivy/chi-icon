@@ -1,176 +1,426 @@
 <template>
-  <swiper
-    :rewind="true"
-    :navigation="true"
-    :autoplay="{ delay: 3500, disableOnInteraction: false }"
-    :modules="modules"
-    class="h-[65vh] lg:h-[50vh] md:h-[45vh] sm:h-[40vh] w-full overflow-hidden"
-  >
-    <!-- Slide 1 -->
-    <!-- backslide -->
-    <swiper-slide class="bg-gray-700 text-white relative">
-      <!-- Background Image for Small Screens -->
-      <div
-        class="absolute inset-0 bg-none bg-center sm:hidden"
-        style="background-image: url('/images/macki.png')"
+  <div class="bg-[#F3F4F6]">
+    <section>
+      <swiper
+        :navigation="{
+          nextEl: '.custom-next',
+          prevEl: '.custom-prev',
+        }"
+        :parallax="true"
+        :loop="true"
+        :autoplay="{
+          delay: 3000,
+          disableOnInteraction: false,
+        }"
+        :modules="modules"
+        class="w-full h-[90vh]"
       >
-        <div class="absolute inset-0 bg-black/50"></div>
-      </div>
+        <!-- slide 1 -->
+        <swiper-slide class="relative">
+          <img
+            src="/images/headset.jpg"
+            alt="gadgets"
+            class="w-full h-full object-cover"
+          />
+          <div
+            class="absolute inset-0 flex items-center justify-center text-center bg-black/30"
+          >
+            <div class="text-white w-full md:container px-4 mx-auto">
+              <h2
+                class="text-3xl md:text-5xl lg:text-7xl leading-[1.2] font-bold mx-auto max-w-4xl"
+              >
+                Where innovation meets lifestyle
+              </h2>
+              <p class="mt-6 text-lg md:text-xl">
+                Explore cutting-edge tech for work, home, and play
+              </p>
 
-      <div
-        class="relative mx-auto w-full max-w-7xl px-4 sm:px-6 py-8 md:px-8 md:py-10 lg:py-12"
-      >
-        <div
-          class="grid grid-cols-1 md:grid-cols-2 items-center gap-8 p-6 md:p-10 w-full max-w-7xl mx-auto"
-        >
-          <div class="text-center md:text-left space-y-4 animate-fade-in">
-            <h2
-              class="text-3xl sm:text-4xl md:text-3xl font-extrabold leading-tight"
-            >
-              Great Deals On All Gadgets
-            </h2>
+              <div
+                class="mt-6 inline-block bg-[#EB5E28] border border-black px-4 py-2 rounded-md cursor-pointer hover:bg-white hover:text-black transition"
+              >
+                Shop now
+              </div>
+            </div>
+          </div>
+        </swiper-slide>
+        <!-- slide 2 -->
+        <swiper-slide class="relative">
+          <img
+            src="/images/kids2.jpg"
+            alt="Kids Image 1"
+            class="w-full h-full object-cover"
+          />
+          <div
+            class="absolute inset-0 flex items-center justify-center text-center bg-black/30"
+          >
+            <div class="text-white w-full md:container px-4 mx-auto">
+              <h2
+                class="text-3xl md:text-5xl lg:text-7xl leading-[1.2] font-bold mx-auto max-w-4xl"
+              >
+                Turn your child's space into a dreamy, magical realm
+              </h2>
+              <p class="mt-6 text-lg md:text-xl">Discover fun and learning!</p>
 
+              <div
+                class="mt-6 inline-block bg-[#EB5E28] px-4 py-2 rounded-md cursor-pointer hover:bg-white hover:text-black transition"
+              >
+                Shop now
+              </div>
+            </div>
+          </div>
+        </swiper-slide>
+        <!-- slide 3 -->
+        <swiper-slide class="relative">
+          <img
+            src="/images/toyxx.jpg"
+            alt="Kids Image 1"
+            class="w-full h-full object-cover"
+          />
+          <div
+            class="absolute inset-0 flex items-center justify-center text-center bg-black/30"
+          >
+            <div class="text-white w-full md:container px-4 mx-auto">
+              <h2
+                class="text-3xl md:text-5xl lg:text-7xl leading-[1.2] font-bold mx-auto max-w-4xl"
+              >
+                Toys that spark joy and creativity!
+              </h2>
+              <p class="mt-6 text-lg md:text-xl">Discover fun and learning!</p>
+              <div
+                class="mt-6 inline-block bg-[#EB5E28] px-4 py-2 rounded-md cursor-pointer hover:bg-white hover:text-black transition"
+              >
+                Shop now
+              </div>
+            </div>
+          </div>
+        </swiper-slide>
+        <div class="hidden md:block">
+          <div
+            class="custom-prev absolute top-1/2 left-4 -translate-y-1/2 z-20"
+          >
             <button
-              class="mt-4 px-6 py-3 bg-white text-pink-700 font-semibold rounded-full shadow-lg hover:bg-pink-100 transition-colors"
+              class="w-12 h-12 bg-white text-black rounded-full flex items-center justify-center hover:bg-[#EB5E28] hover:text-white transition"
             >
-              Shop Now
+              <AppIcon icon="ic:round-arrow-back" class="w-6 h-6" />
             </button>
           </div>
 
-          <!-- Image only visible on medium+ screens -->
-          <img
-            src="/images/macki.png"
-            alt="Latest MacBook"
-            class="w-80 md:w-96 h-auto object-contain mx-auto md:mx-0 hidden sm:block animate-slide-up"
-          />
+          <div
+            class="custom-next absolute top-1/2 right-4 -translate-y-1/2 z-20"
+          >
+            <button
+              class="w-12 h-12 bg-white text-black rounded-full flex items-center justify-center hover:bg-[#EB5E28] hover:text-white transition"
+            >
+              <AppIcon icon="ic:round-arrow-forward" class="w-6 h-6" />
+            </button>
+          </div>
         </div>
-      </div>
-    </swiper-slide>
+      </swiper>
+    </section>
 
-    <!-- Slide 2 -->
-    <swiper-slide class="bg-gray-700 text-white">
-      <div
-        class="grid grid-cols-1 md:grid-cols-2 items-center gap-8 p-6 md:p-10 w-full max-w-7xl mx-auto"
-      >
-        <img
-          src="/images/02bg.png"
-          alt="Latest MacBook"
-          class="w-80 md:w-96 h-auto object-contain mx-auto md:mx-0 animate-slide-up"
-        />
-        <div class="text-center md:text-left space-y-4 animate-fade-in">
-          <h2
-            class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight"
+    <section class="w-full md:container mx-auto px-4">
+      <!-- Shop Categories -->
+      <div class="my-12">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-8 text-center">
+          Shop by Categories
+        </h2>
+        <div v-if="isLoading" class="">
+          <Loader />
+        </div>
+        <div
+          v-else-if="categories.length === 0"
+          class="text-center text-gray-500"
+        >
+          No categories available.
+        </div>
+        <div
+          v-else
+          class="flex flex-col md:flex-row justify-center items-center gap-6"
+        >
+          <router-link
+            v-for="category in categories"
+            :key="category.id"
+            :to="`/products/categories/${category.id}`"
+            class="group relative bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-lg transition-all duration-300"
+            :aria-label="`View ${category.name} category`"
           >
-            Stay Ahead with <br class="hidden md:block" />
-            Smart Tech
-          </h2>
-          <p class="text-lg md:text-xl opacity-90">
-            Discover innovative technology at affordable prices.
-          </p>
-          <button
-            class="mt-4 px-6 py-3 bg-white text-gray-700 font-semibold rounded-full shadow-lg hover:bg-gray-100 transition-colors"
-          >
-            Explore More
-          </button>
+            <div class="relative">
+              <img
+                :src="category.image || '/fallback-image.jpg'"
+                :alt="`Image of ${category.name} category`"
+                class="w-full rounded-full object-cover group-hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+              />
+              <div
+                class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/70 to-transparent"
+              ></div>
+              <h3
+                class="absolute bottom-4 left-0 right-0 text-center text-white text-lg font-semibold"
+              >
+                {{ category.name }}
+              </h3>
+            </div>
+          </router-link>
         </div>
       </div>
-    </swiper-slide>
 
-    <!-- Slide 3 -->
-    <swiper-slide class="bg-gray-600 text-white">
-      <div
-        class="grid grid-cols-1 md:grid-cols-2 items-center gap-8 p-6 md:p-10 w-full max-w-7xl mx-auto"
-      >
-        <img
-          src="/images/ip.png"
-          alt="Smartwatch"
-          class="w-full md:w-96 h-auto max-h-[50vh] object-cover mx-auto md:mx-0 animate-slide-up"
-        />
-        <div class="text-center md:text-left space-y-4 animate-fade-in">
-          <h2
-            class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight"
+      <!-- Trending Products -->
+      <div class="my-12">
+        <div class="">
+          <div class="flex justify-between items-center mb-8">
+            <h2
+              class="text-3xl md:text-4xl lg:text-5xl mx-auto font-bold text-center tracking-tight"
+            >
+              Trending Products
+            </h2>
+          </div>
+
+          <div
+            v-if="isLoading"
+            class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
           >
-            Shop Now and <br class="hidden md:block" />
-            Save Big
-          </h2>
-          <p class="text-lg md:text-xl opacity-90">
-            Limited-time offers on your favorite gadgets!
-          </p>
-          <button
-            class="mt-4 px-6 py-3 bg-white text-gray-600 font-semibold rounded-full shadow-lg hover:bg-gray-100 transition-colors"
+            <SkLoader v-for="i in 8" :key="i" />
+          </div>
+
+          <div
+            v-else
+            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6"
           >
-            Grab Deals
-          </button>
+            <ProductCard
+              v-for="product in trending"
+              :key="product.id"
+              :product="product"
+            />
+          </div>
         </div>
       </div>
-    </swiper-slide>
-  </swiper>
+      <!-- Ads div -->
+      <div class="my-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Smartwatch Card -->
+          <div class="relative rounded-xl overflow-hidden">
+            <img
+              src="/images/01.png"
+              alt="Smartwatches for all lifestyles"
+              class="w-full h-80 md:h-96 object-cover"
+              loading="lazy"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-8 text-white"
+            >
+              <h3 class="text-2xl md:text-3xl font-bold mb-3">
+                Track the Future
+              </h3>
+              <p class="text-base md:text-lg mb-6">
+                Smartwatches for Every Lifestyle
+              </p>
+              <router-link
+                to="/products/new-arrivals"
+                class="relative w-28 flex items-center justify-center h-14 border-2 border-white text-white rounded-md hover:bg-[#ef4444] hover:border-[#ef4444] hover:text-white transition-all duration-300 ease-in-out font-semibold overflow-hidden group"
+                aria-label="View more new arrivals"
+              >
+                <span class="relative z-10">See More</span>
+                <span
+                  class="absolute inset-0 bg-[#EB5E28] transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100"
+                ></span>
+              </router-link>
+            </div>
+          </div>
+
+          <!-- Laptop Card -->
+          <div class="relative rounded-xl overflow-hidden">
+            <img
+              src="/images/alien.jpg"
+              alt="High-performance laptops"
+              class="w-full h-80 md:h-96 object-cover"
+              loading="lazy"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-8 text-white"
+            >
+              <h3 class="text-2xl md:text-3xl font-bold mb-3">
+                Find Your Ideal Laptop
+              </h3>
+              <p class="text-base md:text-lg mb-6">
+                Empowered by Tomorrow's Technology
+              </p>
+              <router-link
+                to="/products/new-arrivals"
+                class="relative w-28 flex items-center justify-center h-14 border-2 border-white text-white rounded-md hover:bg-[#EB5E28] hover:border-[#EB5E28] hover:text-white transition-all duration-300 ease-in-out font-semibold overflow-hidden group mt-1"
+                aria-label="View more new arrivals"
+              >
+                <span class="relative z-10">See More</span>
+                <span
+                  class="absolute inset-0 bg-[#EB5E28] transform scale-x-0 origin-left transition-transform duration-300 ease-in-out group-hover:scale-x-100"
+                ></span>
+              </router-link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- New Arrivals -->
+      <div class="my-24">
+        <h2
+          class="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-12 text-center"
+        >
+          New Arrivals
+        </h2>
+        <div v-if="loading" class="text-center text-gray-500">
+          <Loader />
+        </div>
+        <div
+          v-else-if="displayProducts.length === 0"
+          class="text-center text-gray-500"
+        >
+          No new arrivals available.
+        </div>
+        <div v-else>
+          <Swiper
+            :slides-per-view="1"
+            :space-between="8"
+            :pagination="{ clickable: true, el: '.swiper-pagination' }"
+            :navigation="{
+              nextEl: '.custom-next',
+              prevEl: '.custom-prev',
+            }"
+            :loop="true"
+            :autoplay="{ delay: 3000, disableOnInteraction: false }"
+            :modules="modules"
+            :breakpoints="{
+              320: { slidesPerView: 1.5, spaceBetween: 8 },
+              480: { slidesPerView: 1.5, spaceBetween: 8 },
+              576: { slidesPerView: 1.5, spaceBetween: 10 },
+              640: { slidesPerView: 2, spaceBetween: 10 },
+              768: { slidesPerView: 3, spaceBetween: 12 },
+              1024: { slidesPerView: 4, spaceBetween: 14 },
+              1280: { slidesPerView: 5, spaceBetween: 16 },
+              1536: { slidesPerView: 6, spaceBetween: 18 },
+            }"
+            class="w-full"
+          >
+            <SwiperSlide
+              v-for="product in displayProducts.slice(0, 12)"
+              :key="product.id"
+              class="flex justify-center items-stretch"
+            >
+              <ProductCard :product="product" class="w-full h-96 mb-12" />
+            </SwiperSlide>
+
+            <!-- Pagination -->
+            <div class="swiper-pagination mt-24"></div>
+
+            <!-- Navigation buttons -->
+            <div class="hidden sm:block">
+              <div
+                class="custom-prev absolute top-1/2 -left-4 sm:-left-6 md:-left-8 lg:-left-10 -translate-y-1/2 z-20"
+              >
+                <button
+                  class="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 bg-pink-200 text-black rounded-full flex items-center justify-center hover:bg-[#EB5E28] hover:text-white transition duration-300 shadow-md"
+                >
+                  <AppIcon
+                    icon="ic:round-arrow-back"
+                    class="w-5 h-5 sm:w-6 sm:h-6"
+                  />
+                </button>
+              </div>
+              <div
+                class="custom-next absolute top-1/2 -right-4 sm:-right-6 md:-right-8 lg:-right-10 -translate-y-1/2 z-20"
+              >
+                <button
+                  class="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 bg-pink-200 text-black rounded-full flex items-center justify-center hover:bg-[#EB5E28] hover:text-white transition duration-300 shadow-md"
+                >
+                  <AppIcon
+                    icon="ic:round-arrow-forward"
+                    class="w-5 h-5 sm:w-6 sm:h-6"
+                  />
+                </button>
+              </div>
+            </div>
+          </Swiper>
+        </div>
+      </div>
+
+      <!-- Promotions Banner -->
+      <div class="">
+        <div class="shadow-lg rounded-lg overflow-hidden">
+          <img src="/images/offer.PNG" class="w-full h-48" alt="" />
+        </div>
+      </div>
+    </section>
+  </div>
 </template>
 
 <script>
+import { ref, computed, onMounted } from "vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import "swiper/css/autoplay";
-import { Navigation, Autoplay } from "swiper/modules";
+import "swiper/css/pagination";
+import { storeToRefs } from "pinia";
+import ProductCard from "../components/ProductCard.vue";
+import { useProductStore } from "../store/ProductStore";
+import { trendingProducts } from "../services/auth.service";
+import Loader from "../components/Loader.vue";
+import { getCategories } from "@/services/auth.service";
+import SkLoader from "@/components/skLoader.vue";
 
 export default {
   name: "HomeView",
   components: {
     Swiper,
     SwiperSlide,
+    ProductCard,
+    Loader,
+    SkLoader,
   },
   setup() {
+    const productStore = useProductStore();
+    const { products, loading } = storeToRefs(productStore);
+    const displayProducts = computed(() => products.value || []);
+    const categories = ref([]);
+    const isLoading = ref(false);
+    const trending = ref([]);
+
+    const fetchCategories = async () => {
+      isLoading.value = true;
+      const response = await getCategories();
+      if (response.status === 200) {
+        categories.value = response.data.categories;
+      } else {
+        console.error("Failed to fetch categories:", response.data.message);
+      }
+      isLoading.value = false;
+    };
+
+    const fetchTrendingProducts = async () => {
+      isLoading.value = true;
+      const response = await trendingProducts();
+      if (response?.data) {
+        trending.value = response.data.trending;
+        console.log("Trending Products:", trending.value);
+      } else {
+        console.warn("No trending products found");
+      }
+      isLoading.value = false;
+    };
+
+    onMounted(() => {
+      fetchCategories();
+      fetchTrendingProducts();
+      productStore.fetchProducts();
+    });
+
     return {
-      modules: [Navigation, Autoplay],
+      products,
+      loading,
+      displayProducts,
+      modules: [Navigation, Pagination, Autoplay],
+      categories,
+      isLoading,
+      trending,
     };
   },
 };
 </script>
-
-<style scoped>
-/* Custom styles for enhanced aesthetics */
-.swiper-slide {
-  transition: background-color 0.3s ease;
-  overflow: hidden;
-}
-
-h2 {
-  font-family: "Poppins", sans-serif;
-  color: #ffffff;
-}
-
-p {
-  font-family: "Roboto", sans-serif;
-  color: #f1f1f1;
-}
-
-/* Animation Keyframes */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideUp {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.8s ease-out forwards;
-}
-
-.animate-slide-up {
-  animation: slideUp 0.8s ease-out forwards;
-}
-</style>

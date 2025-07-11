@@ -5,6 +5,7 @@ import axios from "axios";
 
 // const router = useRouter()
 const baseUrl = process.env.VUE_APP_BASEURL;
+
 export const axiosPost = async (point, data) => {
   const sessiondata = session.get("sessionData");
   console.log(sessiondata);

@@ -28,6 +28,7 @@
                 <input
                   v-model="formData.first_name"
                   type="text"
+                  name="first_name"
                   placeholder="First Name"
                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring focus:ring-red-500 focus:border-red-500"
                   :class="{ 'border-red-500': errors.first_name }"
@@ -44,6 +45,7 @@
                 <input
                   v-model="formData.last_name"
                   type="text"
+                  name="last_name"
                   placeholder="Last Name"
                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring focus:ring-red-500 focus:border-red-500"
                   :class="{ 'border-red-500': errors.last_name }"
@@ -63,6 +65,7 @@
                 <input
                   v-model="formData.username"
                   type="text"
+                  name="username"
                   placeholder="Username"
                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring focus:ring-red-500 focus:border-red-500"
                   :class="{ 'border-red-500': errors.username }"
@@ -79,6 +82,7 @@
                 <input
                   v-model="formData.phone_number"
                   type="text"
+                  name="phone_number"
                   placeholder="Phone Number"
                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring focus:ring-red-500 focus:border-red-500"
                   :class="{ 'border-red-500': errors.phone_number }"
@@ -96,6 +100,7 @@
               <input
                 v-model="formData.email"
                 type="email"
+                name="email"
                 placeholder="Enter your email"
                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring focus:ring-red-500 focus:border-red-500"
                 :class="{ 'border-red-500': errors.email }"
@@ -153,25 +158,7 @@
             >
               <span v-if="!isLoading">Register</span>
               <span v-else class="flex items-center">
-                <svg
-                  class="animate-spin h-5 w-5 mr-3 text-white"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    class="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    stroke-width="4"
-                  ></circle>
-                  <path
-                    class="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  ></path>
-                </svg>
-                Processing...
+                <ButtonLoader />
               </span>
             </button>
 
@@ -195,9 +182,13 @@ import { reactive, ref, computed } from "vue";
 import { signup } from "@/services/auth.auth";
 import { useToast } from "vue-toastification";
 import { useRouter } from "vue-router";
+import ButtonLoader from "@/components/ButtonLoader.vue";
 
 export default {
   name: "RegisterView",
+  components: {
+    ButtonLoader,
+  },
   setup() {
     const formData = reactive({
       first_name: "",

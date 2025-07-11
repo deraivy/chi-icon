@@ -124,29 +124,11 @@
             <button
               type="submit"
               :disabled="isLoading || !isFormValid"
-              class="w-full flex justify-center py-3 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring focus:ring-offset focus:ring-red-500 disabled:bg-gray-400 disabled:cursor-not-allowed"
+              class="w-full flex justify-center py-3 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-red-600 hover:bg-red-700 disabled:cursor-not-allowed"
             >
               <span v-if="!isLoading">Sign In</span>
               <span v-else class="flex items-center">
-                <svg
-                  class="animate-spin h-5 w-5 mr-3 text-white"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    class="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    stroke-width="4"
-                  ></circle>
-                  <path
-                    class="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  ></path>
-                </svg>
-                Signing in...
+                <ButtonLoader />
               </span>
             </button>
           </form>
@@ -172,9 +154,13 @@ import { session } from "@/utils";
 import { useToast } from "vue-toastification";
 import { signin } from "@/services/auth.auth"; // Adjusted import path
 import { useRouter } from "vue-router";
+import ButtonLoader from "@/components/ButtonLoader.vue";
 
 export default {
   name: "LoginView",
+  components: {
+    ButtonLoader,
+  },
   setup() {
     const formData = reactive({
       email: "",
@@ -249,9 +235,9 @@ export default {
       }
 
       try {
-        console.log("Sending login request with:", formData); // Debug log
+        console.log("Sending login request with:", formData);
         const response = await signin(formData);
-        console.log("Login response:", response); // Debug log
+        console.log("Login raw response:", response);
 
         if (response && !response.error) {
           toast.success(response.data.message || "Login Successful");
@@ -260,13 +246,15 @@ export default {
             window.location.reload();
           });
         } else {
-          toast.error(response.error?.message || "Error: Try again.");
+          toast.error(response.error?.message || "Invalid email or password");
         }
       } catch (error) {
-        console.error("Login error:", error); // Debug log
-        toast.error("An error occurred during login: " + error.message);
-      } finally {
-        isLoading.value = false;
+        console.error("Login catch error:", {
+          message: error.message,
+          status: error.response?.status,
+          data: error.response?.data,
+        });
+        toast.error(error.response?.data?.message || "Login failed");
       }
     };
 

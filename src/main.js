@@ -1,9 +1,13 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
+import piniaPersist from "pinia-plugin-persistedstate";
 import App from "./App.vue";
 import router from "./router";
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
+import { Icon } from "@iconify/vue";
+import VueAwesomePaginate from "vue-awesome-paginate";
+import "vue-awesome-paginate/dist/style.css";
 
 const toastOptions = {
   position: "top-right",
@@ -17,8 +21,14 @@ const toastOptions = {
   closeButton: "button",
   icon: true,
 };
+
+const pinia = createPinia();
+pinia.use(piniaPersist);
+
 const app = createApp(App);
 app.use(router);
-app.use(createPinia());
+app.use(pinia);
+app.component("AppIcon", Icon);
 app.use(Toast, toastOptions);
+app.use(VueAwesomePaginate);
 app.mount("#app");

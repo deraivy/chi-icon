@@ -1,80 +1,135 @@
 <template>
-  <div class="w-full mx-auto overflow-hidden transition-all duration-300">
+  <div
+    class="overflow-hidden transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+    @click="goToDetails"
+  >
     <div class="relative group">
       <img
         :src="product.image"
         :alt="product.name"
-        class="h-48 lg:h-80 md:h-80 sm:h-64 w-full rounded-lg object-cover transition-transform duration-300 bg-gray-100"
+        class="h-48 sm:h-56 md:h-64 lg:h-80 w-full object-cover rounded-xl transition-transform duration-500 group-hover:scale-105 bg-gray-100"
         loading="lazy"
       />
-      <div class="absolute top-3 right-2 flex flex-col gap-2">
-        <!-- Add to Cart (Visible on Hover) -->
 
-        <div
-          @click.prevent="addToCart(product)"
-          class="w-9 h-9 bg-white/90 flex items-center justify-center rounded-full shadow-sm transition-all duration-300 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 hover:bg-red-500 hover:shadow-md hover:scale-110"
+      <!-- Action Icons -->
+      <div
+        class="absolute bottom-0 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-row items-center justify-center gap-2 z-10 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300"
+      >
+        <!-- Add to Cart -->
+        <button
+          @click.stop="addToCart"
+          :disabled="product.out_of_stock"
+          class="p-2.5 bg-white/95 backdrop-blur-sm rounded-full shadow-sm text-gray-700 hover:text-white hover:bg-[#1e3a8a] disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#1e3a8a] focus:ring-opacity-50"
+          aria-label="Add to Cart"
         >
-          <img
-            src="/icons/cart.svg"
-            alt="Shopping Cart"
-            class="w-5 h-5 text-gray-700 group-hover:text-red-600 transition-colors duration-200"
-          />
-        </div>
-        <!-- Favorite (Visible on Hover) -->
-        <div
-          class="w-9 h-9 bg-white/90 flex items-center justify-center rounded-full shadow-sm transition-all duration-300 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 hover:bg-red-500 hover:shadow-md hover:scale-110"
+          <div class="relative group/button">
+            <AppIcon
+              icon="bx:cart"
+              class="text-xl transition-colors duration-300"
+            />
+            <span
+              class="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 hidden group-hover/button:block px-2 py-1 text-xs font-medium text-white bg-[#1e3a8a] rounded-md whitespace-nowrap transition-opacity duration-200"
+            >
+              Add to Cart
+            </span>
+          </div>
+        </button>
+
+        <!-- Add to Favorites -->
+        <button
+          type="button"
+          @click.stop="addToFavourite"
+          class="p-2.5 bg-white/90 backdrop-blur-sm rounded-full shadow-md text-gray-700 hover:text-white hover:bg-[#1e3a8a] transition-all duration-300 ease-in-out transform hover:scale-110 focus:outline-none"
+          aria-label="Add to Favorites"
         >
-          <img
-            src="/icons/love.svg"
-            alt="Shopping Cart"
-            class="w-5 h-5 text-gray-700 group-hover:text-red-600 transition-colors duration-200"
-          />
-        </div>
-        <!-- View (Visible on Hover) -->
-        <router-link
-          :to="`/products-details/${product.id}`"
-          class="w-9 h-9 bg-white/90 flex items-center justify-center rounded-full shadow-sm transition-all duration-300 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 hover:bg-red-500 hover:shadow-md hover:scale-110"
+          <div class="relative group/button">
+            <AppIcon
+              icon="icon-park-outline:like"
+              class="text-xl transition-colors duration-300"
+            />
+            <span
+              class="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 hidden group-hover/button:block px-2 py-1 text-xs font-medium text-white bg-[#1e3a8a] rounded-md whitespace-nowrap transition-opacity duration-200"
+            >
+              Favourite
+            </span>
+          </div>
+        </button>
+
+        <!-- Quick View -->
+        <button
+          @click.stop="goToDetails"
+          class="p-2.5 bg-white/90 backdrop-blur-sm rounded-full shadow-md text-gray-700 hover:text-white hover:bg-[#1e3a8a] transition-all duration-300 ease-in-out transform hover:scale-110 focus:outline-none"
+          aria-label="Quick View"
         >
-          <img
-            src="/icons/eye.svg"
-            alt="Shopping Cart"
-            class="w-5 h-5 text-gray-700 group-hover:text-red-600 transition-colors duration-200"
-          />
-        </router-link>
+          <div class="relative group/button">
+            <AppIcon
+              icon="basil:eye-outline"
+              class="text-xl transition-colors duration-300"
+            />
+            <span
+              class="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 hidden group-hover/button:block px-2 py-1 text-xs font-medium text-white bg-[#1e3a8a] rounded-md whitespace-nowrap transition-opacity duration-200"
+            >
+              Quick View
+            </span>
+          </div>
+        </button>
       </div>
     </div>
-    <div class="py-4">
+
+    <!-- Product Info -->
+    <div class="py-5">
       <p
-        class="text-sm font-medium text-center text-gray-800 truncate capitalize tracking-wide hover:text-rose-600 transition-colors duration-200"
+        @click.stop="goToDetails"
+        class="text-base font-semibold text-gray-800 truncate capitalize tracking-tight hover:text-[#1e3a8a] transition-colors duration-200"
       >
         {{ product.name }}
       </p>
-
-      <p class="text-lg text-center font-bold text-gray-700">
-        ₦{{ product.price.toLocaleString("en-NG") }}
-      </p>
+      <div class="flex justify-between items-center">
+        <span class="text-lg font-bold text-red-600">
+          ₦{{ product.price.toLocaleString("en-NG") }}
+        </span>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { defineProps } from "vue";
+import { useRouter, defineProps } from "vue-router";
 import { useCartStore } from "@/store/cartStore";
+import { useFavouriteStore } from "@/store/wishlistStore";
+import { useToast } from "vue-toastification";
+import { session } from "@/utils";
 
-defineProps({
+const props = defineProps({
   product: {
     type: Object,
     required: true,
   },
 });
-
+const toast = useToast();
+const router = useRouter();
 const cartStore = useCartStore();
-const addToCart = (product) => {
-  cartStore.addToCart(product);
-  console.log(`${product.name} added to cart!`);
-};
-</script>
+const favouriteStore = useFavouriteStore();
 
-<style scoped>
-/* Tailwind handles everything, no custom CSS needed */
-</style>
+function addToCart() {
+  cartStore.addToCart(props.product);
+  toast.success(`${props.product.name} added to cart!`);
+}
+
+function addToFavourite() {
+  const sessionData = session.get("sessionData");
+  const token = sessionData?.access_token;
+
+  if (!token) {
+    toast.warning("Please log in to add to favourites");
+    router.push("/login");
+    return;
+  }
+
+  favouriteStore.toggleFavourite(props.product);
+}
+
+function goToDetails() {
+  router.push(`/products-details/${props.product.id}`);
+}
+</script>
