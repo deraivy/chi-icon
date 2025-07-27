@@ -1,23 +1,39 @@
 <template>
   <div class="min-h-screen">
-    <div
-      class="bg-[#f7f7f7] w-full h-[10vh] md:h-[20vh] lg:h-[25vh] flex items-center justify-center"
+    <header
+      class="bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300 w-full h-[15vh] md:h-[25vh] lg:h-[30vh] flex items-center justify-center relative overflow-hidden"
     >
-      <div>
-        <p class="text-4xl font-bold text-black">Product</p>
-        <div
-          class="text-sm text-black text-center flex items-center justify-center gap-2 mt-2"
+      <div class="text-center relative z-10">
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 tracking-tight transition-all duration-300 hover:scale-105"
         >
-          Home
-          <div class="bg-black w-2 h-2 rounded-full"></div>
           Product
-        </div>
+        </h1>
+        <nav
+          class="text-sm md:text-base text-gray-700 flex items-center justify-center gap-3 mt-3"
+        >
+          <router-link
+            to="/"
+            class="hover:text-gray-900 transition-colors duration-200"
+            >Home</router-link
+          >
+          <div class="bg-gray-900 w-1.5 h-1.5 rounded-full"></div>
+          <a
+            href="#"
+            class="font-semibold hover:text-gray-900 transition-colors duration-200"
+            >Product</a
+          >
+        </nav>
       </div>
-    </div>
+      <!-- Background overlay for depth -->
+      <div
+        class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.2),transparent)]"
+      ></div>
+    </header>
 
     <!-- Main Content -->
     <main class="w-full md:container mx-auto px-4 md:px-0 py-12">
-      <!-- Filter Toggle Button for Mobile -->
+      <!-- Filter Mobile -->
       <div class="md:hidden flex justify-between items-center mb-6">
         <h3 class="text-xl font-semibold text-gray-900">Products</h3>
         <button
@@ -68,11 +84,8 @@
             </p>
           </div>
           <section class="w-full">
-            <div
-              v-if="loading"
-              class="flex items-center justify-center h-[70vh]"
-            >
-              <Loader />
+            <div v-if="loading" class="grid grid-cols-2 md:grid-cols-3 gap-6">
+              <SkLoader v-for="i in 8" :key="i" />
             </div>
 
             <div
@@ -120,8 +133,9 @@ import { ref, onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useProductStore } from "@/store/ProductStore";
 import ProductCard from "@/components/ProductCard.vue";
-import Loader from "@/components/Loader.vue";
+// import Loader from "@/components/Loader.vue";
 import Filter from "@/components/Filter.vue";
+import SkLoader from "@/components/skLoader.vue";
 
 const productStore = useProductStore();
 const { products, loading, currentPage, perPage, totalProducts } =
@@ -190,5 +204,20 @@ onMounted(() => {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 8s ease infinite;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-pink-100 to-blue-100 text-gray-800 z-50"
+    class="fixed inset-0 flex items-center justify-center bg-[#e6e6e6] text-gray-800 z-50"
   >
     <div class="text-center animate-fade-in-up">
       <h1 class="text-4xl md:text-6xl font-bold tracking-wide text-[#10203f]">

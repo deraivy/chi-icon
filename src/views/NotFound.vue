@@ -1,19 +1,26 @@
 <template>
-  <div class="bg-gradient-to-r from-slate-200 to-gray-200 text-black">
-    <div class="flex items-center justify-center h-[90vh] px-2">
-      <div class="text-center">
-        <h1 class="text-9xl font-bold">404</h1>
-        <p class="text-2xl font-medium mt-4">Oops! Page not found</p>
-        <p class="mt-4 mb-8">
-          The page you're looking for doesn't exist or has been moved.
-        </p>
-        <router-link
-          to="/NotFound"
-          class="px-6 py-3 bg-white font-bold font-semibold rounded-full hover:bg-red-400 hover:text-white transition duration-300 ease-in-out"
-        >
-          Go Home
-        </router-link>
-      </div>
+  <div class="min-h-screen bg-gray-100 flex items-center justify-center px-4">
+    <div class="text-center max-w-lg">
+      <img
+        src="/images/errorr.svg"
+        alt="404 Error Illustration"
+        class="w-full max-w-md h-auto mx-auto mb-8 animate-bounce-slow"
+        onerror="this.src='/images/fallback-error.png'"
+      />
+
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+        Oops! Page Not Found
+      </h1>
+      <p class="text-lg md:text-xl text-gray-600 mb-8">
+        It looks like you're lost in space. Let's get you back home!
+      </p>
+
+      <router-link
+        to="/"
+        class="inline-block px-8 py-3 font-semibold text-lg rounded-full bg-[#10203f] hover:bg-[#ff8c4b] text-white transition duration-300 ease-in-out transform hover:scale-105"
+      >
+        Go Home
+      </router-link>
     </div>
   </div>
 </template>
@@ -24,4 +31,29 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+/* Slow bounce animation for the illustration */
+@keyframes bounce-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 3s ease-in-out infinite;
+}
+
+/* Ensure dark mode compatibility */
+.dark .bg-gray-100 {
+  background-color: #1f2937;
+}
+
+/* Smooth button hover transition */
+.router-link-active {
+  outline: none;
+}
+</style>

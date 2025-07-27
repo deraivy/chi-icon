@@ -1,20 +1,36 @@
 <template>
-  <section class="relative w-full h-[25vh] md:h-[35vh] lg:h-[45vh]">
-    <!-- Background Image -->
-    <img
-      src="/images/header.jpg"
-      alt="Hero background"
-      class="w-full h-full object-cover"
-    />
-    <div class="absolute top-0 left-0 w-full h-full bg-black/30"></div>
-    <div
-      class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-4xl font-bold z-10"
-    >
-      Contact Us
+  <header
+    class="bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300 w-full h-[15vh] md:h-[25vh] lg:h-[30vh] flex items-center justify-center relative overflow-hidden"
+  >
+    <div class="text-center relative z-10">
+      <h1
+        class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 tracking-tight transition-all duration-300 hover:scale-105"
+      >
+        Contact
+      </h1>
+      <nav
+        class="text-sm md:text-base text-gray-700 flex items-center justify-center gap-3 mt-3"
+      >
+        <router-link
+          to="/"
+          class="hover:text-gray-900 transition-colors duration-200"
+          >Home</router-link
+        >
+        <div class="bg-gray-900 w-1.5 h-1.5 rounded-full"></div>
+        <a
+          href="#"
+          class="font-semibold hover:text-gray-900 transition-colors duration-200"
+          >Contact</a
+        >
+      </nav>
     </div>
-  </section>
+    <!-- Background overlay for depth -->
+    <div
+      class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.2),transparent)]"
+    ></div>
+  </header>
 
-  <section class="bg-[#f5f5f5]">
+  <section class="">
     <div class="py-24">
       <div
         class="grid sm:grid-cols-2 items-center gap-16 p-8 mx-auto max-w-4xl bg-white rounded-md text-[#333] font-[sans-serif]"
@@ -32,26 +48,31 @@
                 <div
                   class="bg-[#e6e6e6cf] h-10 w-10 rounded-full flex items-center justify-center shrink-0"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20px"
-                    height="20px"
-                    fill="#10203f"
-                    viewBox="0 0 479.058 479.058"
-                  >
-                    <path
-                      d="M434.146 59.882H44.912C20.146 59.882 0 80.028 0 104.794v269.47c0 24.766 20.146 44.912 44.912 44.912h389.234c24.766 0 44.912-20.146 44.912-44.912v-269.47c0-24.766-20.146-44.912-44.912-44.912zm0 29.941c2.034 0 3.969.422 5.738 1.159L239.529 264.631 39.173 90.982a14.902 14.902 0 0 1 5.738-1.159zm0 299.411H44.912c-8.26 0-14.971-6.71-14.971-14.971V122.615l199.778 173.141c2.822 2.441 6.316 3.655 9.81 3.655s6.988-1.213 9.81-3.655l199.778-173.141v251.649c-.001 8.26-6.711 14.97-14.971 14.97z"
-                      data-original="#000000"
-                    />
-                  </svg>
+                  <AppIcon
+                    icon="iconamoon:email-light"
+                    class="w-7 h-7 text-gray-800 group-hover:text-[#EB5E28] transition-colors duration-200"
+                  />
                 </div>
-                <a
-                  target="blank"
-                  href="https://veilmail.io/e/FkKh7o"
-                  class="text-red-600 text-sm ml-3"
-                >
+
+                <a target="blank" class="text-sm ml-3">
                   <small class="block">Mail</small>
-                  <strong>https://veilmail.io/e/FkKh7o</strong>
+                  <strong class="text-base">chiicon@gmail.com</strong>
+                </a>
+              </li>
+
+              <li class="flex items-center mt-4">
+                <div
+                  class="bg-[#e6e6e6cf] h-10 w-10 rounded-full flex items-center justify-center shrink-0"
+                >
+                  <AppIcon
+                    icon="solar:phone-linear"
+                    class="w-7 h-7 text-gray-800 group-hover:text-[#EB5E28] transition-colors duration-200"
+                  />
+                </div>
+
+                <a target="blank" class="text-sm ml-3">
+                  <small class="block">Phone</small>
+                  <strong class="text-base">0913456793</strong>
                 </a>
               </li>
             </ul>
@@ -120,22 +141,22 @@
           <input
             type="text"
             placeholder="Name"
-            class="w-full rounded-md py-2.5 px-4 border text-sm outline-red-600"
+            class="w-full rounded-md py-2.5 px-4 border text-sm outline-[#10203f]"
           />
           <input
             type="email"
             placeholder="Email"
-            class="w-full rounded-md py-2.5 px-4 border text-sm outline-red-600"
+            class="w-full rounded-md py-2.5 px-4 border text-sm outline-[#10203f]"
           />
           <input
             type="text"
             placeholder="Subject"
-            class="w-full rounded-md py-2.5 px-4 border text-sm outline-red-600"
+            class="w-full rounded-md py-2.5 px-4 border text-sm outline-[#10203f]"
           />
           <textarea
             placeholder="Message"
             rows="6"
-            class="w-full rounded-md px-4 border text-sm pt-2.5 outline-red-600"
+            class="w-full rounded-md px-4 border text-sm pt-2.5 outline-[#10203f]"
           ></textarea>
           <button
             type="button"

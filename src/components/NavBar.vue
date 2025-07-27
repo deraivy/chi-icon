@@ -143,7 +143,7 @@
       <!-- Mobile Dropdown Menu -->
       <div
         v-if="drawer"
-        class="md:hidden bg-white text-center shadow-lg px-4 py-6 flex flex-col space-y-4"
+        class="md:hidden bg-white text-center px-4 py-6 flex flex-col space-y-4"
       >
         <router-link
           to="/"

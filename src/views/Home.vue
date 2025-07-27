@@ -141,7 +141,7 @@
           class="flex flex-col md:flex-row justify-center items-center gap-6"
         >
           <router-link
-            v-for="category in categories"
+            v-for="category in categories.slice(0, 3)"
             :key="category.id"
             :to="`/products/categories/${category.id}`"
             class="group relative bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-lg transition-all duration-300"
@@ -149,7 +149,7 @@
           >
             <div class="relative">
               <img
-                :src="category.image || '/fallback-image.jpg'"
+                :src="category.image || '/images/11873.jpg'"
                 :alt="`Image of ${category.name} category`"
                 class="w-full rounded-full object-cover group-hover:scale-105 transition-transform duration-300"
                 loading="lazy"
@@ -303,11 +303,11 @@
               :key="product.id"
               class="flex justify-center items-stretch"
             >
-              <ProductCard :product="product" class="w-full h-96 mb-12" />
+              <ProductCard :product="product" class="w-full h-1/2 mb-12" />
             </SwiperSlide>
 
             <!-- Pagination -->
-            <div class="swiper-pagination mt-24"></div>
+            <div class="swiper-pagination mt-12 md:mt-24"></div>
           </Swiper>
         </div>
       </div>

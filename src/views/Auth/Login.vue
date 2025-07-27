@@ -124,7 +124,7 @@
             <button
               type="submit"
               :disabled="isLoading || !isFormValid"
-              class="w-full flex justify-center py-3 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-[#10203f] hover:bg-[#1e3a8a] disabled:cursor-not-allowed"
+              class="w-full flex justify-center py-3 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-[#10203f] hover:bg-[#ff8c4b] disabled:cursor-not-allowed"
             >
               <span v-if="!isLoading">Sign In</span>
               <span v-else class="flex items-center">
@@ -138,7 +138,7 @@
             Don't have an account?
             <router-link
               to="/register"
-              class="font-medium text-[#10203f] hover:text-red-700"
+              class="font-medium text-[#10203f] hover:font-semibold hover:text-[#ff8c4b]"
               >Sign up now</router-link
             >
           </p>

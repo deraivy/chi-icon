@@ -30,8 +30,8 @@
                   type="text"
                   name="first_name"
                   placeholder="First Name"
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring focus:ring-red-500 focus:border-red-500"
-                  :class="{ 'border-red-500': errors.first_name }"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring focus:ring-[#10203f] focus:border-[#10203f]"
+                  :class="{ 'border-[#10203f]': errors.first_name }"
                   @blur="validateField('first_name')"
                 />
                 <p v-if="errors.first_name" class="text-red-500 text-xs mt-1">
@@ -47,8 +47,8 @@
                   type="text"
                   name="last_name"
                   placeholder="Last Name"
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring focus:ring-red-500 focus:border-red-500"
-                  :class="{ 'border-red-500': errors.last_name }"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring focus:ring-[#10203f] focus:border-[#10203f]"
+                  :class="{ 'border-[#10203f]': errors.last_name }"
                   @blur="validateField('last_name')"
                 />
                 <p v-if="errors.last_name" class="text-red-500 text-xs mt-1">
@@ -67,8 +67,8 @@
                   type="text"
                   name="username"
                   placeholder="Username"
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring focus:ring-red-500 focus:border-red-500"
-                  :class="{ 'border-red-500': errors.username }"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring focus:ring-[#10203f] focus:border-[#10203f]"
+                  :class="{ 'border-[#10203f]': errors.username }"
                   @blur="validateField('username')"
                 />
                 <p v-if="errors.username" class="text-red-500 text-xs mt-1">
@@ -84,8 +84,8 @@
                   type="text"
                   name="phone_number"
                   placeholder="Phone Number"
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring focus:ring-red-500 focus:border-red-500"
-                  :class="{ 'border-red-500': errors.phone_number }"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring focus:ring-[#10203f] focus:border-[#10203f]"
+                  :class="{ 'border-[#10203f]': errors.phone_number }"
                   @blur="validateField('phone_number')"
                 />
                 <p v-if="errors.phone_number" class="text-red-500 text-xs mt-1">
@@ -102,8 +102,8 @@
                 type="email"
                 name="email"
                 placeholder="Enter your email"
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring focus:ring-red-500 focus:border-red-500"
-                :class="{ 'border-red-500': errors.email }"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring focus:ring-[#10203f] focus:border-[#10203f]"
+                :class="{ 'border-[#10203f]': errors.email }"
                 @blur="validateField('email')"
               />
               <p v-if="errors.email" class="text-red-500 text-xs mt-1">
@@ -121,8 +121,8 @@
                   v-model="formData.password"
                   type="password"
                   placeholder="••••••••"
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring focus:ring-red-500 focus:border-red-500"
-                  :class="{ 'border-red-500': errors.password }"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring focus:ring-[#10203f] focus:border-[#10203f]"
+                  :class="{ 'border-[#10203f]': errors.password }"
                   @blur="validateField('password')"
                 />
                 <p v-if="errors.password" class="text-red-500 text-xs mt-1">
@@ -137,8 +137,8 @@
                   v-model="formData.confirm_password"
                   type="password"
                   placeholder="••••••••"
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring focus:ring-red-500 focus:border-red-500"
-                  :class="{ 'border-red-500': errors.confirm_password }"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring focus:ring-[#10203f] focus:border-[#10203f]"
+                  :class="{ 'border-[#10203f]': errors.confirm_password }"
                   @blur="validateField('confirm_password')"
                 />
                 <p
@@ -152,7 +152,7 @@
 
             <!-- Register Button with Loader -->
             <button
-              class="w-full mt-2 py-3 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 transition duration-300 flex items-center justify-center"
+              class="w-full mt-2 py-3 bg-[#10203f] text-white font-medium rounded-lg hover:bg-[#ff8c4b] transition duration-300 flex items-center justify-center"
               type="submit"
               :disabled="isLoading"
             >
@@ -165,7 +165,7 @@
             <div class="text-center">
               <router-link
                 to="/login"
-                class="text-sm text-gray-700 hover:underline"
+                class="text-sm text-gray-700 hover:underline hover:font-semibold hover:text-[#ff8c4b] transition-colors duration-300"
               >
                 Already have an account? Login!
               </router-link>
