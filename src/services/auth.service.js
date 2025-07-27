@@ -47,7 +47,7 @@ export const favorite = async (data) => {
 };
 
 export const allfavourites = async (data) => {
-  return await axiosGet("api/v1/products/get_favorites", data);
+  return await axiosGet("/api/v1/products/get_favorites", data);
 };
 
 export const getCategories = async (data) => {

@@ -7,7 +7,7 @@
       <img
         :src="product.image"
         :alt="product.name"
-        class="h-48 sm:h-56 md:h-64 lg:h-80 w-full object-cover rounded-xl transition-transform duration-500 group-hover:scale-105 bg-gray-100"
+        class="h-64 md:h-72 lg:h-80 w-full object-cover rounded-xl transition-transform duration-500 group-hover:scale-105"
         loading="lazy"
       />
 

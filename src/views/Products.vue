@@ -1,18 +1,19 @@
 <template>
-  <div class="min-h-screen bg-gray-100">
-    <section class="relative w-full h-[25vh] md:h-[35vh] lg:h-[45vh]">
-      <img
-        src="/images/header.jpg"
-        alt="Hero background"
-        class="w-full h-full object-cover"
-      />
-      <div class="absolute top-0 left-0 w-full h-full bg-black/30"></div>
-      <div
-        class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-4xl font-bold z-10"
-      >
-        Products
+  <div class="min-h-screen">
+    <div
+      class="bg-[#f7f7f7] w-full h-[10vh] md:h-[20vh] lg:h-[25vh] flex items-center justify-center"
+    >
+      <div>
+        <p class="text-4xl font-bold text-black">Product</p>
+        <div
+          class="text-sm text-black text-center flex items-center justify-center gap-2 mt-2"
+        >
+          Home
+          <div class="bg-black w-2 h-2 rounded-full"></div>
+          Product
+        </div>
       </div>
-    </section>
+    </div>
 
     <!-- Main Content -->
     <main class="w-full md:container mx-auto px-4 md:px-0 py-12">
@@ -21,7 +22,7 @@
         <h3 class="text-xl font-semibold text-gray-900">Products</h3>
         <button
           @click="toggleFilter"
-          class="px-4 py-2 bg-[#EB5E28] text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 flex items-center gap-2"
+          class="px-4 py-2 bg-[#10203f] text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 flex items-center gap-2"
         >
           <svg
             class="w-5 h-5"

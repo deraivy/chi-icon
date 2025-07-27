@@ -16,7 +16,7 @@
         <div class="sm:mx-auto sm:w-full sm:max-w-md">
           <!-- Header -->
           <div class="text-center mb-8">
-            <h2 class="text-3xl font-bold text-red-600">Welcome Back</h2>
+            <h2 class="text-3xl font-bold text-[#10203f]">Welcome Back</h2>
             <p class="mt-2 text-gray-600">Please sign in to your account</p>
           </div>
 
@@ -115,7 +115,7 @@
               </div>
               <router-link
                 to="/request-reset"
-                class="text-sm text-red-600 hover:text-red-700"
+                class="text-sm text-[#10203f] hover:text-red-700"
                 >Forgot password?</router-link
               >
             </div>
@@ -124,7 +124,7 @@
             <button
               type="submit"
               :disabled="isLoading || !isFormValid"
-              class="w-full flex justify-center py-3 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-red-600 hover:bg-red-700 disabled:cursor-not-allowed"
+              class="w-full flex justify-center py-3 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-[#10203f] hover:bg-[#1e3a8a] disabled:cursor-not-allowed"
             >
               <span v-if="!isLoading">Sign In</span>
               <span v-else class="flex items-center">
@@ -138,7 +138,7 @@
             Don't have an account?
             <router-link
               to="/register"
-              class="font-medium text-red-600 hover:text-red-700"
+              class="font-medium text-[#10203f] hover:text-red-700"
               >Sign up now</router-link
             >
           </p>

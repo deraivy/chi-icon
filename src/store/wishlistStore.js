@@ -11,22 +11,22 @@ export const useFavouriteStore = defineStore("wishlist", {
       this.onLoading = true;
       try {
         const response = await allfavourites();
-        const data = await response.json();
-        this.favourites = data?.favourites || [];
+        const data = response.data;
+        console.log("Favorites response:", data);
+        this.favourites = (data?.favorites || []).map((fav) => fav.product);
       } catch (error) {
         console.error("Error fetching favourites:", error);
       } finally {
         this.onLoading = false;
       }
     },
-
     async toggleFavourite(product) {
       this.onLoading = true;
       try {
         console.log("Adding/removing favourite:", product);
-        const response = await favorite(product.id);
-        const resData = await response.json();
+        const resData = await favorite({ product_id: product.id }); // No `.json()` here
         console.log("Favourite API response:", resData);
+
         const exists = this.favourites.find((p) => p.id === product.id);
         if (exists) {
           this.favourites = this.favourites.filter((p) => p.id !== product.id);

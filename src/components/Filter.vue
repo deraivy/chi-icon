@@ -50,15 +50,15 @@
       <div class="border-b border-gray-200 mb-3"></div>
       <div
         v-show="showCategories"
-        class="flex flex-col gap-2 max-h-48 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 mb-6"
+        class="flex flex-col gap-2 max-h-48 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 mb-6"
       >
         <span
           v-for="category in categories"
           :key="category.id"
           @click="updateFilter('category', category.id)"
-          class="cursor-pointer px-3 py-2 rounded-lg text-sm sm:text-base transition-colors duration-200"
+          class="cursor-pointer py-2 rounded-lg text-sm sm:text-base transition-colors duration-200"
           :class="{
-            'bg-blue-100 text-blue-700 font-medium':
+            'bg-gray-200 text-[#10203f] font-medium':
               selectedCategory === category.id,
             'hover:bg-gray-100 text-gray-700': selectedCategory !== category.id,
           }"
@@ -84,13 +84,13 @@
       <div class="border-b border-gray-200 mb-3"></div>
       <div
         v-show="showColors"
-        class="grid grid-cols-8 lg:grid-cols-6 gap-2 mb-6"
+        class="grid grid-cols-1 md:grid-cols-2 gap-2 mb-6"
       >
         <div
           v-for="color in colors"
           :key="color"
           @click="updateFilter('color', color)"
-          class="cursor-pointer w-8 h-8 rounded-full border-2 transition-all duration-200 relative group"
+          class="cursor-pointer w-7 h-7 py-2 rounded-full border-2 transition-all duration-200 relative group"
           :style="{ backgroundColor: color }"
           :class="{
             'border-blue-500 ring-2 ring-blue-300': selectedColor === color,
@@ -99,7 +99,7 @@
           :aria-label="`Select color ${color}`"
         >
           <span
-            class="absolute invisible group-hover:visible bg-gray-800 text-white text-xs rounded py-1 px-2 -top-8 left-1/2 transform -translate-x-1/2"
+            class="absolute text-black text-sm rounded py-1 px-2 -top-0 left-8"
           >
             {{ color }}
           </span>

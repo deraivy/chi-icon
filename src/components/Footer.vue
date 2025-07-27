@@ -1,9 +1,9 @@
 <template>
   <footer
-    class="bg-gray-50 border-t border-gray-200 text-gray-800 py-12 px-4 sm:px-6"
+    class="bg-[#f7f7f7] border-t border-gray-200 text-gray-800 py-12 px-4 sm:px-6"
   >
     <divz
-      class="max-w-7xl mx-auto grid gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-start"
+      class="w-full md:container px-4 mx-auto grid gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-start"
     >
       <!-- Branding & About -->
       <div class="animate-fade-in-up">
@@ -28,7 +28,7 @@
           <li>
             <router-link
               to="/cart"
-              class="flex items-center text-gray-600 hover:text-red-600 transition-colors duration-300"
+              class="flex items-center text-gray-600 hover:text-[#ff8c4b] transition-colors duration-300"
               aria-label="View shopping cart"
             >
               Cart
@@ -37,7 +37,7 @@
           <li>
             <router-link
               to="/checkout"
-              class="flex items-center text-gray-600 hover:text-red-600 transition-colors duration-300"
+              class="flex items-center text-gray-600 hover:text-[#ff8c4b] transition-colors duration-300"
               aria-label="Proceed to checkout"
             >
               Checkout
@@ -46,7 +46,7 @@
           <li>
             <router-link
               to="/account"
-              class="flex items-center text-gray-600 hover:text-red-600 transition-colors duration-300"
+              class="flex items-center text-gray-600 hover:text-[#ff8c4b] transition-colors duration-300"
               aria-label="View my account"
             >
               My Account
@@ -58,36 +58,32 @@
       <!-- Contact Info -->
       <div class="animate-fade-in-up animation-delay-400">
         <h4 class="text-lg font-poppins font-semibold text-gray-900 mb-4">
-          Get in Touch
+          Need Help
         </h4>
         <ul class="space-y-3 text-sm">
-          <li class="flex items-center">
+          <li class="flex items-center cursor-pointer">
             <a
-              href="tel:+2348501235021"
-              class="text-gray-600 hover:text-red-600 transition-colors duration-300"
+              class="text-gray-600 hover:text-[#ff8c4b] transition-colors duration-300"
               aria-label="Call Chiicon support"
             >
-              +234 850-123-5021
+              Privacy Policy
             </a>
           </li>
-          <li class="flex items-center">
+          <li class="flex items-center cursor-pointer">
             <a
-              href="mailto:info@chiicon.com"
-              class="text-gray-600 hover:text-red-600 transition-colors duration-300"
+              class="text-gray-600 hover:text-[#ff8c4b] transition-colors duration-300"
               aria-label="Email Chiicon support"
             >
-              info@chiicon.com
+              Terms and Conditions
             </a>
           </li>
-          <li class="flex items-center">
+          <li class="flex items-center cursor-pointer">
             <a
-              href="https://www.google.com/maps/place/4C+Idowu+Martins+St,+Victoria+Island,+Lagos,+Nigeria"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-gray-600 hover:text-red-600 transition-colors duration-300"
-              aria-label="View Chiicon location on Google Maps"
+              href="mailto:info@chiicon.com"
+              class="text-gray-600 hover:text-[#ff8c4b] transition-colors duration-300"
+              aria-label="Email Chiicon support"
             >
-              4C Idowu Martins, VI, Lagos
+              FAQ
             </a>
           </li>
         </ul>
@@ -98,23 +94,26 @@
         <h4 class="text-lg font-poppins font-semibold text-gray-900 mb-4">
           Follow Us
         </h4>
-        <!-- <div class="flex gap-4">
-          <a
-            v-for="social in socials"
-            :key="social.name"
-            :href="social.url"
-            :aria-label="`Follow Chiicon on ${social.name}`"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="flex items-center justify-center w-12 h-12 bg-gray-600 rounded-full border border-gray-300 hover:border-red-600 hover:bg-red-600 transition-all duration-300 group"
+        <div class="flex gap-4">
+          <div
+            class="flex items-center justify-center w-12 h-12 bg-[#EB5E28] rounded-full shadow-md hover:bg-[#ff8c4b] transition-colors duration-300"
           >
-            <ion-icon
-              :name="social.icon"
-              class="text-white text-xl group-hover:scale-110 transition-transform duration-300"
-              aria-hidden="true"
-            ></ion-icon>
-          </a>
-        </div> -->
+            <AppIcon icon="mdi:instagram" class="w-6 h-6 text-white" />
+          </div>
+          <div
+            class="flex items-center justify-center w-12 h-12 bg-[#EB5E28] rounded-full shadow-md hover:bg-[#ff8c4b] transition-colors duration-300"
+          >
+            <AppIcon
+              icon="grommet-icons:facebook-option"
+              class="w-6 h-6 text-white"
+            />
+          </div>
+          <div
+            class="flex items-center justify-center w-12 h-12 bg-[#EB5E28] rounded-full shadow-md hover:bg-[#ff8c4b] transition-colors duration-300"
+          >
+            <AppIcon icon="ri:twitter-x-line" class="w-6 h-6 text-white" />
+          </div>
+        </div>
       </div>
     </divz>
 

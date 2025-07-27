@@ -62,6 +62,7 @@ const routes = [
     path: "/wishlist",
     name: "wishlist",
     component: Wishlist,
+    meta: { requiresAuth: true },
   },
   {
     path: "/products-details/:id",
@@ -84,6 +85,7 @@ const routes = [
     name: "checkout",
     component: Checkout,
   },
+
   {
     path: "/:catchAll(.*)",
     name: "notfound",
@@ -136,14 +138,8 @@ router.beforeEach(async (to, from, next) => {
     favouriteStore.favourites.length === 0 &&
     !favouriteStore.onLoading
   ) {
-    try {
-      await favouriteStore.fetchFavourites(); // ✅ safe now inside async function
-    } catch (error) {
-      console.error("Failed to fetch favourites:", error);
-      // Optional: handle error, show notification, or redirect
-    }
+    await favouriteStore.fetchFavourites();
   }
-
   next();
 });
 

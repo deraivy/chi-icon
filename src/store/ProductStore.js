@@ -14,7 +14,7 @@ export const useProductStore = defineStore("products", {
     loading: false,
     error: null,
     currentPage: 1,
-    perPage: 20,
+    perPage: 21,
     totalProducts: 0,
     categories: [],
     colors: [

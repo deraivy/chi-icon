@@ -1,13 +1,35 @@
 <template>
-  <header class="w-full bg-[#10203f] text-white">
-    <div class="w-full md:container mx-auto px-5 py-2 overflow-hidden">
-      <p class="text-center text-sm mt-2 marquee">
-        Your one-stop shop for all things chic!
-      </p>
+  <header class="w-full bg-[#10203f] text-white text-sm">
+    <div class="flex justify-between items-center py-2 container mx-auto px-4">
+      <div class="flex items-center space-x-2">
+        <AppIcon icon="line-md:phone" class="w-4 h-4" />
+        <p>09136230385</p>
+      </div>
+
+      <div class="flex items-center space-x-3">
+        <router-link
+          v-if="isLoggedIn"
+          to="/logout"
+          @click="logoutUser"
+          class="hover:text-[#ff8c4b]"
+          >Logout</router-link
+        >
+        <router-link v-else to="/login" class="hover:text-[#ff8c4b]"
+          >Login</router-link
+        >
+        <span v-if="!isLoggedIn" class="opacity-50">|</span>
+        <router-link
+          v-if="!isLoggedIn"
+          to="/register"
+          class="hover:text-[#ff8c4b]"
+          >Register</router-link
+        >
+      </div>
     </div>
   </header>
-  <div class="bg-white shadow-md font-sans sticky top-0 z-50">
-    <div class="w-full md:container mx-auto px-2">
+
+  <div class="bg-white sticky top-0 z-50">
+    <div class="w-full container mx-auto px-4">
       <nav class="flex justify-between items-center py-4 h-18">
         <div class="flex items-center space-x-6">
           <router-link
@@ -18,31 +40,31 @@
             <img
               src="/images/logo.png"
               alt="Hiicon Logo"
-              class="w-24 h-24 lg:w-40 lg:h-48 sm:w-16 sm:h-16 md:w-32 md:h-32 object-contain transition-transform duration-300 ease-in-out"
+              class="w-24 h-24 lg:w-32 lg:h-32 sm:w-16 sm:h-16 object-contain transition-transform duration-300 ease-in-out"
             />
           </router-link>
 
-          <!-- Desktop Menu (Left Side) -->
+          <!-- Desktop Menu -->
           <div
-            class="hidden md:flex items-center space-x-6 lg:space-x-8 text-base font-semibold text-gray-700"
+            class="hidden md:flex items-center space-x-6 lg:space-x-8 text-base font-medium text-gray-700"
           >
             <router-link
               to="/"
-              class="text-gray-700 hover:text-red-600 transition-colors duration-200"
+              class="hover:text-[#EB5E28] transition-colors"
               @click="isSearchModalOpen = false"
             >
               Home
             </router-link>
             <router-link
               to="/products"
-              class="text-gray-700 hover:text-red-600 transition-colors duration-200"
+              class="hover:text-[#EB5E28] transition-colors"
               @click="isSearchModalOpen = false"
             >
               Shop
             </router-link>
             <router-link
               to="/contact"
-              class="text-gray-700 hover:text-red-600 transition-colors duration-200"
+              class="hover:text-[#EB5E28] transition-colors"
               @click="isSearchModalOpen = false"
             >
               Contact Us
@@ -50,258 +72,192 @@
           </div>
         </div>
 
-        <div class="flex items-center">
-          <!-- Search Icon -->
+        <div class="flex items-center space-x-3">
+          <!-- Search -->
           <button
             @click="isSearchModalOpen = true"
-            class="text-gray-700 hover:text-red-600 transition-colors duration-200"
+            class="text-gray-700 hover:text-[#EB5E28] transition-colors duration-200"
+            aria-label="Search"
           >
             <AppIcon icon="ph:magnifying-glass-bold" class="w-7 h-7" />
           </button>
-          <!-- Login -->
-          <div class="relative inline-block text-left">
-            <div class="group">
-              <button
-                type="button"
-                class="inline-flex justify-center items-center w-full px-4 py-2 text-sm font-medium text-gray-900 hover:text-red-700 focus:outline-none focus:bg-gray-700"
-              >
-                <AppIcon icon="gravity-ui:person" class="w-7 h-7" />
-              </button>
-              <div
-                class="absolute left-0 w-40 mt-1 origin-top-left bg-white divide-y divide-gray-100 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:flex transition duration-300 flex-col"
-              >
-                <div class="py-1">
-                  <button
-                    v-show="isLoggedIn"
-                    v-if="isLoggedIn"
-                    @click="logoutUser"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    Logout
-                  </button>
-                  <router-link
-                    v-show="!isLoggedIn"
-                    v-if="!isLoggedIn"
-                    to="/login"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    @click="isSearchModalOpen = false"
-                  >
-                    Login
-                  </router-link>
-                  <router-link
-                    v-show="!isLoggedIn"
-                    v-if="!isLoggedIn"
-                    to="/register"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    @click="isSearchModalOpen = false"
-                  >
-                    Register
-                  </router-link>
-                </div>
-              </div>
-            </div>
-          </div>
 
           <!-- Cart -->
-          <div class="flex items-center">
-            <router-link
-              to="/cart"
-              class="relative group mr-3"
-              @click="isSearchModalOpen = false"
-            >
-              <span
-                class="w-7 h-7 text-gray-800 group-hover:text-red-600 transition-colors duration-200"
-              >
-                <AppIcon icon="akar-icons:shopping-bag" class="w-7 h-7" />
-              </span>
-              <span
-                class="absolute -top-0 -right-1 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center"
-              >
-                {{ cartCount }}
-              </span>
-            </router-link>
-            <router-link
-              to="/wishlist"
-              class="relative group"
-              @click="isSearchModalOpen = false"
-            >
-              <span
-                class="w-7 h-7 text-gray-800 group-hover:text-red-600 transition-colors duration-200"
-              >
-                <AppIcon icon="icon-park-outline:like" class="w-7 h-7" />
-              </span>
-              <span
-                class="absolute -top-0 -right-1 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center"
-              >
-                {{ favouriteCount }}
-              </span>
-            </router-link>
-          </div>
-
-          <!-- Mobile Menu Button -->
-          <button
-            @click="toggleMenu"
-            class="md:hidden p-2 rounded-md hover:bg-gray-100 transition-colors duration-200 focus:outline-none"
+          <router-link
+            to="/cart"
+            class="relative group"
+            @click="isSearchModalOpen = false"
           >
-            <svg
-              class="h-6 w-6 text-gray-700"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+            <AppIcon
+              icon="akar-icons:shopping-bag"
+              class="w-7 h-7 text-gray-800 group-hover:text-[#EB5E28] transition-colors duration-200"
+            />
+            <span
+              class="absolute -top-1 -right-1 bg-[#EB5E28] text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center"
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 12h16m-7 6h7"
-              />
-            </svg>
+              {{ cartCount }}
+            </span>
+          </router-link>
+
+          <!-- Wishlist -->
+          <router-link
+            to="/wishlist"
+            class="relative group"
+            @click="isSearchModalOpen = false"
+          >
+            <AppIcon
+              icon="icon-park-outline:like"
+              class="w-7 h-7 text-gray-800 group-hover:text-[#EB5E28] transition-colors duration-200"
+            />
+            <span
+              class="absolute -top-1 -right-1 bg-[#EB5E28] text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center"
+            >
+              {{ favouriteCount }}
+            </span>
+          </router-link>
+
+          <!-- Mobile Menu Toggle -->
+          <button
+            v-if="!drawer"
+            @click="openDrawer"
+            class="md:hidden text-gray-700 hover:text-[#EB5E28] transition-colors duration-200"
+            aria-label="Open Menu"
+          >
+            <AppIcon
+              icon="iconamoon:menu-burger-horizontal-fill"
+              class="w-8 h-8"
+            />
+          </button>
+
+          <button
+            v-else
+            @click="closeDrawer"
+            class="md:hidden text-gray-700 hover:text-[#EB5E28] transition-colors duration-200"
+            aria-label="Close Menu"
+          >
+            <AppIcon icon="iconamoon:close" class="w-8 h-8" />
           </button>
         </div>
       </nav>
 
       <!-- Mobile Dropdown Menu -->
-      <transition
-        enter-active-class="transition ease-out duration-200"
-        enter-from-class="transform opacity-0 scale-95"
-        enter-to-class="transform opacity-100 scale-100"
-        leave-active-class="transition ease-in duration-150"
-        leave-from-class="transform opacity-100 scale-100"
-        leave-to-class="transform opacity-0 scale-95"
+      <div
+        v-if="drawer"
+        class="md:hidden bg-white text-center shadow-lg px-4 py-6 flex flex-col space-y-4"
       >
-        <div
-          v-if="isMenuOpen"
-          class="md:hidden bg-white border-t border-gray-100 shadow-lg px-4 py-4 flex flex-col space-y-4"
+        <router-link
+          to="/"
+          class="text-gray-700 hover:text-[#EB5E28] text-base font-medium transition-colors duration-200"
+          @click="handleMobileNavClick"
         >
-          <router-link
-            to="/"
-            class="text-gray-700 hover:text-red-600 text-base font-medium transition-colors duration-200"
-            @click="
-              toggleMenu;
-              isSearchModalOpen = false;
-            "
-          >
-            Home
-          </router-link>
-          <router-link
-            to="/products"
-            class="text-gray-700 hover:text-red-600 text-base font-medium transition-colors duration-200"
-            @click="
-              toggleMenu;
-              isSearchModalOpen = false;
-            "
-          >
-            Shop
-          </router-link>
-          <router-link
-            to="/contact"
-            class="text-gray-700 hover:text-red-600 text-base font-medium transition-colors duration-200"
-            @click="
-              toggleMenu;
-              isSearchModalOpen = false;
-            "
-          >
-            Contact Us
-          </router-link>
-          <router-link
-            to="/register"
-            class="text-gray-700 hover:text-red-600 text-base font-medium transition-colors duration-200"
-            @click="
-              toggleMenu;
-              isSearchModalOpen = false;
-            "
-          >
-            Register
-          </router-link>
-        </div>
-      </transition>
+          Home
+        </router-link>
+        <router-link
+          to="/products"
+          class="text-gray-700 hover:text-[#EB5E28] text-base font-medium transition-colors duration-200"
+          @click="handleMobileNavClick"
+        >
+          Shop
+        </router-link>
+        <router-link
+          to="/contact"
+          class="text-gray-700 hover:text-[#EB5E28] text-base font-medium transition-colors duration-200"
+          @click="handleMobileNavClick"
+        >
+          Contact Us
+        </router-link>
+        <router-link
+          to="/register"
+          class="text-gray-700 hover:text-[#EB5E28] text-base font-medium transition-colors duration-200"
+          @click="handleMobileNavClick"
+        >
+          Register
+        </router-link>
+      </div>
     </div>
 
     <!-- Search Modal -->
-    <transition
-      enter-active-class="transition ease-out duration-300"
-      enter-from-class="opacity-0"
-      enter-to-class="opacity-100"
-      leave-active-class="transition ease-in duration-200"
-      leave-from-class="opacity-100"
-      leave-to-class="opacity-0"
+    <!-- Overlay -->
+    <div
+      v-if="isSearchModalOpen"
+      class="fixed inset-0 bg-white/40 backdrop-blur-xs z-40 transition-opacity duration-300"
+      @click="isSearchModalOpen = false"
+    />
+    <div
+      v-if="isSearchModalOpen"
+      class="fixed top-0 left-0 w-full h-full sm:h-auto sm:max-h-[90vh] bg-white z-50 overflow-y-auto px-4 sm:px-8 md:px-16 lg:px-24 py-8 sm:py-12 shadow-2xl sm:rounded-b-2xl"
     >
-      <div
-        v-if="isSearchModalOpen"
-        class="w-full min-h-screen mx-auto md:container bg-white rounded-lg p-6 transform transition-all duration-300"
-      >
-        <div class="flex justify-between items-center mb-6">
-          <h3 class="text-xl font-semibold text-gray-900">Search Products</h3>
-          <button
-            @click="isSearchModalOpen = false"
-            class="text-gray-600 hover:text-gray-800 transition-colors duration-200"
-          >
-            <svg
-              class="w-6 h-6"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-        </div>
-
-        <div class="relative">
-          <input
-            v-model="searchQuery"
-            @input="searchProducts"
-            @keyup.enter="goToSearchPage"
-            type="text"
-            placeholder="Search for products..."
-            class="w-full p-3 pl-10 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#10203f] focus:border-transparent outline-none text-gray-700 placeholder-gray-400 transition-all duration-200"
-            autofocus
-          />
+      <div class="flex justify-end items-center mb-4">
+        <button
+          @click="isSearchModalOpen = false"
+          class="text-gray-500 hover:text-gray-900 transition-colors duration-200 p-2 rounded-full hover:bg-gray-100"
+          aria-label="Close Search"
+        >
           <svg
-            class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400"
+            class="w-7 h-7"
+            xmlns="http://www.w3.org/2000/svg"
             fill="none"
-            stroke="currentColor"
             viewBox="0 0 24 24"
+            stroke="currentColor"
           >
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
               stroke-width="2"
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              d="M6 18L18 6M6 6l12 12"
             />
           </svg>
-        </div>
+        </button>
+      </div>
 
-        <h2 class="mt-6 text-2xl font-medium text-gray-900">
-          Top Search Results:
-        </h2>
-        <div v-if="topResults?.length" class="overflow-y-auto">
-          <div
-            class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4"
-          >
-            <ProductCard
-              v-for="product in topResults"
-              :key="product.id"
-              :product="product"
-              @click="goToProductPage(product.id)"
-            />
-          </div>
-        </div>
-
-        <div
-          v-else-if="searchQuery && !topResults?.length"
-          class="mt-6 text-gray-500 text-center text-lg"
+      <div class="relative py-4 max-w-3xl mx-auto">
+        <input
+          v-model="searchQuery"
+          @input="searchProducts"
+          @keyup.enter="goToSearchPage"
+          placeholder="I'm looking for..."
+          class="w-full p-4 pr-12 border-0 border-b-2 border-gray-300 focus:border-[#10203f] bg-gray-50 rounded-t-lg text-gray-800 placeholder-gray-400 focus:ring-0 focus:outline-none transition-all duration-300 text-lg sm:text-xl font-light"
+          autofocus
+        />
+        <svg
+          class="absolute right-4 top-1/2 transform -translate-y-1/2 h-6 w-6 text-gray-400"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
         >
-          No results found.
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+          />
+        </svg>
+      </div>
+
+      <div
+        v-if="topResults?.length"
+        class="w-full md:container px-4 mx-auto mt-6"
+      >
+        <div
+          class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"
+        >
+          <ProductCard
+            v-for="product in topResults"
+            :key="product.id"
+            :product="product"
+            @click="goToProductPage(product.id)"
+            class="transition-transform duration-200 hover:scale-105"
+          />
         </div>
       </div>
-    </transition>
+
+      <div
+        v-else-if="searchQuery && !topResults?.length"
+        class="mt-10 text-gray-500 text-center text-lg sm:text-xl font-light"
+      >
+        No results found. Try a different search term.
+      </div>
+    </div>
   </div>
 </template>
 
@@ -319,18 +275,30 @@ const router = useRouter();
 const cartStore = useCartStore();
 const favouriteStore = useFavouriteStore();
 const productStore = useProductStore();
+
 const { cartCount } = storeToRefs(cartStore);
 const { favouriteCount } = storeToRefs(favouriteStore);
 const { products } = storeToRefs(productStore);
 
 const isLoggedIn = computed(() => session.exists("sessionData"));
-const isMenuOpen = ref(false);
+
+const drawer = ref(false);
 const isSearchModalOpen = ref(false);
 const searchQuery = ref("");
 const topResults = ref([]);
 
+const openDrawer = () => {
+  drawer.value = true;
+};
+const closeDrawer = () => {
+  drawer.value = false;
+};
 const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value;
+  drawer.value = !drawer.value;
+};
+const handleMobileNavClick = () => {
+  toggleMenu();
+  isSearchModalOpen.value = false;
 };
 
 const searchProducts = () => {

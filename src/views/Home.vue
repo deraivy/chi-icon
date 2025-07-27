@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[#F3F4F6]">
+  <div class="bg-[]">
     <section>
       <swiper
         :navigation="{
@@ -35,11 +35,12 @@
                 Explore cutting-edge tech for work, home, and play
               </p>
 
-              <div
-                class="mt-6 inline-block bg-[#EB5E28] border border-black px-4 py-2 rounded-md cursor-pointer hover:bg-white hover:text-black transition"
+              <router-link
+                to="/products"
+                class="mt-6 inline-block bg-[#EB5E28] px-4 py-2.5 rounded-md cursor-pointer hover:bg-[#c94f21] transition"
               >
                 Shop now
-              </div>
+              </router-link>
             </div>
           </div>
         </swiper-slide>
@@ -61,11 +62,12 @@
               </h2>
               <p class="mt-6 text-lg md:text-xl">Discover fun and learning!</p>
 
-              <div
-                class="mt-6 inline-block bg-[#EB5E28] px-4 py-2 rounded-md cursor-pointer hover:bg-white hover:text-black transition"
+              <router-link
+                to="/products"
+                class="mt-6 inline-block bg-[#EB5E28] px-4 py-2.5 rounded-md cursor-pointer hover:bg-[#c94f21] transition"
               >
                 Shop now
-              </div>
+              </router-link>
             </div>
           </div>
         </swiper-slide>
@@ -86,11 +88,12 @@
                 Toys that spark joy and creativity!
               </h2>
               <p class="mt-6 text-lg md:text-xl">Discover fun and learning!</p>
-              <div
-                class="mt-6 inline-block bg-[#EB5E28] px-4 py-2 rounded-md cursor-pointer hover:bg-white hover:text-black transition"
+              <router-link
+                to="/products"
+                class="mt-6 inline-block bg-[#EB5E28] px-4 py-2.5 rounded-md cursor-pointer hover:bg-[#c94f21] transition"
               >
                 Shop now
-              </div>
+              </router-link>
             </div>
           </div>
         </swiper-slide>
@@ -184,7 +187,7 @@
 
           <div
             v-else
-            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6"
+            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"
           >
             <ProductCard
               v-for="product in trending"
@@ -280,10 +283,6 @@
             :slides-per-view="1"
             :space-between="8"
             :pagination="{ clickable: true, el: '.swiper-pagination' }"
-            :navigation="{
-              nextEl: '.custom-next',
-              prevEl: '.custom-prev',
-            }"
             :loop="true"
             :autoplay="{ delay: 3000, disableOnInteraction: false }"
             :modules="modules"
@@ -309,42 +308,7 @@
 
             <!-- Pagination -->
             <div class="swiper-pagination mt-24"></div>
-
-            <!-- Navigation buttons -->
-            <div class="hidden sm:block">
-              <div
-                class="custom-prev absolute top-1/2 -left-4 sm:-left-6 md:-left-8 lg:-left-10 -translate-y-1/2 z-20"
-              >
-                <button
-                  class="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 bg-pink-200 text-black rounded-full flex items-center justify-center hover:bg-[#EB5E28] hover:text-white transition duration-300 shadow-md"
-                >
-                  <AppIcon
-                    icon="ic:round-arrow-back"
-                    class="w-5 h-5 sm:w-6 sm:h-6"
-                  />
-                </button>
-              </div>
-              <div
-                class="custom-next absolute top-1/2 -right-4 sm:-right-6 md:-right-8 lg:-right-10 -translate-y-1/2 z-20"
-              >
-                <button
-                  class="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 bg-pink-200 text-black rounded-full flex items-center justify-center hover:bg-[#EB5E28] hover:text-white transition duration-300 shadow-md"
-                >
-                  <AppIcon
-                    icon="ic:round-arrow-forward"
-                    class="w-5 h-5 sm:w-6 sm:h-6"
-                  />
-                </button>
-              </div>
-            </div>
           </Swiper>
-        </div>
-      </div>
-
-      <!-- Promotions Banner -->
-      <div class="">
-        <div class="shadow-lg rounded-lg overflow-hidden">
-          <img src="/images/offer.PNG" class="w-full h-48" alt="" />
         </div>
       </div>
     </section>
