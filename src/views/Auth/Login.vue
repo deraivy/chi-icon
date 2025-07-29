@@ -152,7 +152,7 @@
 import { reactive, ref, computed } from "vue";
 import { session } from "@/utils";
 import { useToast } from "vue-toastification";
-import { signin } from "@/services/auth.auth"; // Adjusted import path
+import { signin } from "@/services/auth.auth";
 import { useRouter } from "vue-router";
 import ButtonLoader from "@/components/ButtonLoader.vue";
 
@@ -216,7 +216,6 @@ export default {
     };
 
     const handleLogin = async () => {
-      console.log("Login attempt started"); // Debug log
       isLoading.value = true;
 
       const isValid = validateForm();
@@ -247,6 +246,7 @@ export default {
           });
         } else {
           toast.error(response.error?.message || "Invalid email or password");
+          isLoading.value = false; // 🔴 Important: stop loader on failed login
         }
       } catch (error) {
         console.error("Login catch error:", {
@@ -255,6 +255,7 @@ export default {
           data: error.response?.data,
         });
         toast.error(error.response?.data?.message || "Login failed");
+        isLoading.value = false; // 🔴 Important: stop loader on exception
       }
     };
 
@@ -271,7 +272,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-/* Additional styles if needed */
-</style>

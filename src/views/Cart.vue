@@ -149,11 +149,13 @@
               <span class="font-semibold">Total</span>
               <span class="font-semibold">₦{{ cartTotal.toFixed(2) }}</span>
             </div>
-            <button
-              class="bg-[#10203f] text-white py-2 px-4 rounded-lg mt-4 w-full text-sm sm:text-base"
-            >
-              Checkout
-            </button>
+            <router-link to="/checkout">
+              <button
+                class="bg-[#10203f] text-white py-2 px-4 rounded-lg mt-4 w-full text-sm sm:text-base"
+              >
+                Checkout
+              </button>
+            </router-link>
           </div>
         </div>
       </div>

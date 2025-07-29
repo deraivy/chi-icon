@@ -127,6 +127,7 @@
         <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-8 text-center">
           Shop by Categories
         </h2>
+
         <div v-if="isLoading" class="">
           <Loader />
         </div>
@@ -144,25 +145,23 @@
             v-for="category in categories.slice(0, 3)"
             :key="category.id"
             :to="`/products/categories/${category.id}`"
-            class="group relative bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-lg transition-all duration-300"
+            class="border border-gray-200 p-4 flex items-center gap-4 hover:bg-gray-50 transition-colors duration-300 rounded-lg shadow-sm w-full md:w-1/3"
             :aria-label="`View ${category.name} category`"
           >
-            <div class="relative">
+            <div class="flex gap-4 items-center">
               <img
-                :src="category.image || '/images/11873.jpg'"
+                :src="category.image"
                 :alt="`Image of ${category.name} category`"
-                class="w-full rounded-full object-cover group-hover:scale-105 transition-transform duration-300"
-                loading="lazy"
+                class="w-28 h-28 rounded-md object-cover border border-gray-100"
               />
-              <div
-                class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/70 to-transparent"
-              ></div>
-              <h3
-                class="absolute bottom-4 left-0 right-0 text-center text-white text-lg font-semibold"
-              >
+              <p class="text-lg font-medium text-gray-800">
                 {{ category.name }}
-              </h3>
+              </p>
             </div>
+
+            <span class="ml-auto text-gray-500">
+              <AppIcon icon="lsicon:arrow-right-filled" class="w-12 h-12" />
+            </span>
           </router-link>
         </div>
       </div>

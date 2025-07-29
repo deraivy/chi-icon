@@ -112,6 +112,14 @@ const cartStore = useCartStore();
 const favouriteStore = useFavouriteStore();
 
 function addToCart() {
+  const sessionData = session.get("sessionData");
+  const token = sessionData?.access_token;
+
+  if (!token) {
+    toast.warning("Please log in to add to cart");
+    router.push("/login");
+    return;
+  }
   cartStore.addToCart(props.product);
   toast.success(`${props.product.name} added to cart!`);
 }

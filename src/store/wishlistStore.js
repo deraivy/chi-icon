@@ -24,7 +24,7 @@ export const useFavouriteStore = defineStore("wishlist", {
       this.onLoading = true;
       try {
         console.log("Adding/removing favourite:", product);
-        const resData = await favorite({ product_id: product.id }); // No `.json()` here
+        const resData = await favorite({ product_id: product.id });
         console.log("Favourite API response:", resData);
 
         const exists = this.favourites.find((p) => p.id === product.id);
