@@ -186,18 +186,18 @@
       <transition name="fade">
         <div
           v-if="showSuccessModal"
-          class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+          class="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
         >
           <div class="bg-white p-8 rounded-xl text-center max-w-md shadow-lg">
             <h2 class="text-2xl font-bold text-green-600 mb-4">
-              Payment Successful!
+              Payment Successful 🎉
             </h2>
             <p class="text-gray-700 mb-6">
               Thank you for your purchase. Your order has been placed.
             </p>
             <button
               @click="goToThankYouPage"
-              class="bg-indigo-600 text-white py-2 px-6 rounded hover:bg-indigo-700 transition"
+              class="bg-[#10203f] hover:bg-[#1e3a8a] text-white py-2 px-6 rounded transition"
             >
               Continue
             </button>
@@ -251,7 +251,7 @@ const form = reactive({
 
 const goToThankYouPage = () => {
   showSuccessModal.value = false;
-  window.location.href = "/thank-you"; // Adjust if needed
+  window.location.href = "/";
 };
 
 onMounted(async () => {
