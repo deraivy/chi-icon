@@ -362,7 +362,6 @@ export default {
       const response = await trendingProducts();
       if (response?.data) {
         trending.value = response.data.trending;
-        console.log("Trending Products:", trending.value);
       } else {
         console.warn("No trending products found");
       }

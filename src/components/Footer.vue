@@ -2,7 +2,7 @@
   <footer
     class="bg-[#f7f7f7] border-t border-gray-200 text-gray-800 py-12 px-4 sm:px-6"
   >
-    <divz
+    <div
       class="w-full md:container px-4 mx-auto grid gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-start"
     >
       <!-- Branding & About -->
@@ -115,7 +115,7 @@
           </div>
         </div>
       </div>
-    </divz>
+    </div>
 
     <!-- Copyright -->
     <div

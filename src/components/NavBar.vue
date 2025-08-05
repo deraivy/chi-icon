@@ -1,33 +1,4 @@
 <template>
-  <header class="w-full bg-[#10203f] text-white text-sm">
-    <div class="flex justify-between items-center py-2 container mx-auto px-4">
-      <div class="flex items-center space-x-2">
-        <AppIcon icon="line-md:phone" class="w-4 h-4" />
-        <p>08171951214</p>
-      </div>
-
-      <div class="flex items-center space-x-3">
-        <router-link
-          v-if="isLoggedIn"
-          to="/logout"
-          @click="logoutUser"
-          class="hover:text-[#ff8c4b]"
-          >Logout</router-link
-        >
-        <router-link v-else to="/login" class="hover:text-[#ff8c4b]"
-          >Login</router-link
-        >
-        <span v-if="!isLoggedIn" class="opacity-50">|</span>
-        <router-link
-          v-if="!isLoggedIn"
-          to="/register"
-          class="hover:text-[#ff8c4b]"
-          >Register</router-link
-        >
-      </div>
-    </div>
-  </header>
-
   <div class="bg-white sticky top-0 z-50 border-b border-gray-200 shadow-sm">
     <div class="w-full container mx-auto px-4">
       <nav class="flex justify-between items-center py-4 h-18">
@@ -116,6 +87,54 @@
             </span>
           </router-link>
 
+          <!-- Account -->
+          <div class="hidden md:block relative group">
+            <div class="cursor-pointer">
+              <AppIcon icon="bi:person" class="w-8 h-8 text-gray-700" />
+            </div>
+
+            <div
+              class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 z-50"
+            >
+              <ul class="py-2 text-gray-700">
+                <li>
+                  <router-link
+                    v-if="!isLoggedIn"
+                    to="/login"
+                    class="block cursor-pointer px-4 py-2 hover:bg-gray-100"
+                    >Login</router-link
+                  >
+                </li>
+                <li>
+                  <router-link
+                    v-if="!isLoggedIn"
+                    to="/register"
+                    class="block cursor-pointer px-4 py-2 hover:bg-gray-100"
+                    >Register</router-link
+                  >
+                </li>
+                <li>
+                  <router-link
+                    v-if="isLoggedIn"
+                    to="/order"
+                    class="block cursor-pointer px-4 py-2 hover:bg-gray-100"
+                  >
+                    My Orders
+                  </router-link>
+                </li>
+                <li>
+                  <router-link
+                    v-if="isLoggedIn"
+                    to="/logout"
+                    @click="logoutUser"
+                    class="block cursor-pointer px-4 py-2 hover:bg-gray-100"
+                    >Logout</router-link
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+
           <!-- Mobile Menu Toggle -->
           <button
             v-if="!drawer"
@@ -167,11 +186,36 @@
           Contact Us
         </router-link>
         <router-link
+          v-if="!isLoggedIn"
+          to="/login"
+          class="text-gray-700 hover:text-[#EB5E28] text-base font-medium transition-colors duration-200"
+          @click="handleMobileNavClick"
+        >
+          Login
+        </router-link>
+        <router-link
+          v-if="!isLoggedIn"
           to="/register"
           class="text-gray-700 hover:text-[#EB5E28] text-base font-medium transition-colors duration-200"
           @click="handleMobileNavClick"
         >
           Register
+        </router-link>
+        <router-link
+          v-if="isLoggedIn"
+          to="/order"
+          class="text-gray-700 hover:text-[#EB5E28] text-base font-medium transition-colors duration-200"
+          @click="handleMobileNavClick"
+        >
+          My Orders
+        </router-link>
+        <router-link
+          v-if="isLoggedIn"
+          to="/logout"
+          @click="logoutUser"
+          class="text-gray-700 hover:text-[#EB5E28] text-base font-medium transition-colors duration-200"
+        >
+          Logout
         </router-link>
       </div>
     </div>

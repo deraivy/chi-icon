@@ -55,41 +55,29 @@
             </div>
             <div>
               <label class="block mb-1 font-medium text-gray-700">State</label>
-              <select
+              <input
                 v-model="form.state"
                 required
                 class="w-full p-3 border border-gray-200 rounded-lg"
-              >
-                <option value="Lagos">Lagos</option>
-              </select>
+              />
             </div>
           </div>
 
-          <div>
-            <label class="block mb-1 font-medium text-gray-700">Phone</label>
-            <input
-              v-model="form.phone"
-              type="tel"
-              required
-              class="w-full p-3 border border-gray-200 rounded-lg"
-            />
-          </div>
-
-          <div class="flex items-center gap-3">
-            <input
-              v-model="form.sameBilling"
-              type="checkbox"
-              id="sameBilling"
-              class="h-5 w-5 text-indigo-600 border-gray-300 rounded"
-            />
-            <label for="sameBilling" class="text-sm text-gray-700"
-              >Use same address for billing</label
-            >
-          </div>
+          <!-- Load previous button -->
+          <button
+            type="button"
+            @click="loadPreviousAddress"
+            :disabled="isLoadingAddress"
+            class="text-[#10203f] underline text-sm mb-4"
+          >
+            {{
+              isLoadingAddress ? "Loading address..." : "Use Previous Address"
+            }}
+          </button>
 
           <button
             type="submit"
-            class="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700"
+            class="w-full bg-[#10203f] hover:bg-[#1e3a8a] text-white py-3 rounded-lg"
           >
             Pay Now
           </button>
@@ -210,9 +198,13 @@
 
 <script setup>
 import { reactive, ref, onMounted, computed } from "vue";
-import { getfinalCart, verifyPayment } from "@/services/auth.service";
+import {
+  getfinalCart,
+  verifyPayment,
+  getAddress,
+} from "@/services/auth.service";
 import { useToast } from "vue-toastification";
-import { useCartStore } from "../store/cartStore"; // Adjust path as needed
+import { useCartStore } from "../store/cartStore";
 
 const toast = useToast();
 const cartStore = useCartStore();
@@ -221,6 +213,7 @@ const order = ref(null);
 const isLoading = ref(false);
 const errorMessage = ref(null);
 const showSuccessModal = ref(false);
+const isLoadingAddress = ref(false);
 
 const cartItems = computed(() => {
   if (!order.value?.data?.cart_items) return [];
@@ -245,13 +238,43 @@ const form = reactive({
   apartment: "",
   city: "",
   state: "",
-  phone: "",
   sameBilling: false,
 });
 
 const goToThankYouPage = () => {
   showSuccessModal.value = false;
   window.location.href = "/";
+};
+
+// Load previous address
+const loadPreviousAddress = async () => {
+  isLoadingAddress.value = true;
+  try {
+    const res = await getAddress();
+    console.log("📦 Previous Address Response:", res);
+
+    if (res?.data?.order_address?.length > 0) {
+      const latestAddress = res.data.order_address[0].address;
+
+      const parts = latestAddress.split(",").map((p) => p.trim());
+
+      form.address = parts[0] || "";
+      form.apartment = parts[1] || "";
+      form.city = parts[2] || "";
+
+      const lastPart = parts[parts.length - 1];
+      form.state = /^\d{11}$/.test(lastPart)
+        ? parts[parts.length - 2] || ""
+        : lastPart || "";
+    } else {
+      toast.warning("No previous address found.");
+    }
+  } catch (error) {
+    toast.error("Failed to load previous address.");
+    console.error("Error loading address:", error);
+  } finally {
+    isLoadingAddress.value = false;
+  }
 };
 
 onMounted(async () => {
@@ -276,7 +299,7 @@ onMounted(async () => {
 });
 
 const payWithPaystack = () => {
-  if (!form.address || !form.city || !form.state || !form.phone) {
+  if (!form.address || !form.city || !form.state) {
     alert("Please fill all required fields.");
     return;
   }
@@ -293,15 +316,15 @@ const payWithPaystack = () => {
 
   const fullAddress = `${form.address}${
     form.apartment ? ", " + form.apartment : ""
-  }, ${form.city}, ${form.state}, ${form.phone}`;
+  }, ${form.city}, ${form.state}`;
   const email =
     order.value?.data?.user_email || sessionStorage.getItem("email");
   const name = sessionStorage.getItem("name") || "Customer";
 
   const handler = window.PaystackPop.setup({
-    key: "pk_test_e92a697f3134cac79f13fd5dd9009c10f7db82ca", // Your Paystack public key
+    key: "pk_test",
     email: email,
-    amount: cartTotal.value * 100,
+    amount: Math.round(cartTotal.value * 100),
     currency: "NGN",
     ref: `ref-${Date.now()}`,
     metadata: {
@@ -315,8 +338,6 @@ const payWithPaystack = () => {
       ],
     },
     callback: function (response) {
-      console.log("✅ Payment successful from Paystack:", response);
-
       const payload = {
         cart_ref_id: order.value.data.cart_ref_id,
         reference: response.reference,
@@ -324,17 +345,11 @@ const payWithPaystack = () => {
       };
 
       verifyPayment(payload).then((verificationResponse) => {
-        console.log("🔍 Payment verification response:", verificationResponse);
-
         const isVerified = verificationResponse?.data?.status === "success";
-
-        console.log("Payment verification status:", isVerified);
-
         if (isVerified) {
           cartStore.clearCart();
           localStorage.removeItem("finalizedCartId");
           showSuccessModal.value = true;
-          toast.success("🎉 Payment verified and order placed!");
         } else {
           toast.error("⚠️ Payment verification failed.");
         }

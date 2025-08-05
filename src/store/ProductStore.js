@@ -58,19 +58,6 @@ export const useProductStore = defineStore("products", {
       this.loading = true;
       this.error = null;
 
-      console.log("Fetching products with filters:", {
-        page,
-        perPage,
-        category,
-        color,
-        minPrice,
-        maxPrice,
-        model,
-        name,
-        sortBy,
-        sortOrder,
-      });
-
       try {
         const response = await getProducts(page, perPage, {
           category_id: category,

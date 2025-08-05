@@ -14,7 +14,6 @@
       <!-- Login Form Section -->
       <div class="w-full lg:w-7/12 bg-white p-8 flex flex-col justify-center">
         <div class="sm:mx-auto sm:w-full sm:max-w-md">
-          <!-- Header -->
           <div class="text-center mb-8">
             <h2 class="text-3xl font-bold text-[#10203f]">Welcome Back</h2>
             <p class="mt-2 text-gray-600">Please sign in to your account</p>
@@ -54,7 +53,7 @@
                   v-model="formData.password"
                   id="password"
                   placeholder="••••••••"
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring focus:ring-red-500"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg"
                   :class="{ 'border-red-500': errors.password }"
                   @blur="validateField('password')"
                 />
@@ -105,17 +104,10 @@
             </div>
 
             <!-- Remember Me & Forgot Password -->
-            <div
-              class="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0"
-            >
-              <div class="flex items-center">
-                <label for="remember" class="ml-2 text-sm text-gray-600"
-                  >Remember me</label
-                >
-              </div>
+            <div class="flex justify-end">
               <router-link
                 to="/request-reset"
-                class="text-sm text-[#10203f] hover:text-red-700"
+                class="text-sm text-[#10203f] hover:text-[#1e3a8a]"
                 >Forgot password?</router-link
               >
             </div>
@@ -234,10 +226,7 @@ export default {
       }
 
       try {
-        console.log("Sending login request with:", formData);
         const response = await signin(formData);
-        console.log("Login raw response:", response);
-
         if (response && !response.error) {
           toast.success(response.data.message || "Login Successful");
           session.set("sessionData", response.data);
@@ -246,7 +235,7 @@ export default {
           });
         } else {
           toast.error(response.error?.message || "Invalid email or password");
-          isLoading.value = false; // 🔴 Important: stop loader on failed login
+          isLoading.value = false;
         }
       } catch (error) {
         console.error("Login catch error:", {
@@ -255,7 +244,7 @@ export default {
           data: error.response?.data,
         });
         toast.error(error.response?.data?.message || "Login failed");
-        isLoading.value = false; // 🔴 Important: stop loader on exception
+        isLoading.value = false;
       }
     };
 

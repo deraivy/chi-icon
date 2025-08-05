@@ -11,7 +11,6 @@ export const useCartStore = defineStore("cart", {
         (total, item) => total + (item.quantity || 0),
         0
       );
-      console.log("Cart count:", count, "Cart items:", state.cartItems);
       return count;
     },
     cartTotal: (state) =>
@@ -37,7 +36,6 @@ export const useCartStore = defineStore("cart", {
         this.cartItems.push({ product, quantity });
       }
       this.saveCart();
-      console.log("Cart updated:", this.cartItems);
     },
 
     removeFromCart(productId) {

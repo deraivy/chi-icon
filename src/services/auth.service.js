@@ -69,3 +69,7 @@ export const getAddress = async (data) => {
 export const verifyPayment = async (data) => {
   return await axiosPost("/api/v1/products/verify_payment", data);
 };
+
+export const allOrders = async (data) => {
+  return await axiosGet("/api/v1/products/orders", data);
+};

@@ -16,6 +16,11 @@ export const resetRequest = async (data) => {
   return await axiosPost("/api/v1/auth/request_reset_password", data);
 };
 
+// Reset Password
+export const resetPassword = async (data) => {
+  return await axiosPost("/api/v1/auth/reset_password", data);
+};
+
 //Resend Email verification
 export const resendemailverification = async (data) => {
   return await axiosPost("/auth/resend-verification", data);

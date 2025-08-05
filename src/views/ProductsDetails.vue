@@ -222,7 +222,6 @@ const specifications = computed(
 
 function addToCart() {
   cartStore.addToCart(product.value, item.value.quantity);
-  console.log("Added to cart:", product.value.name);
 }
 
 // ✅ Fetch data function

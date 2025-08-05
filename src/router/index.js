@@ -17,6 +17,7 @@ import NotFound from "@/views/NotFound.vue";
 import NetworkError from "@/views/NetworkError.vue";
 import Contact from "@/views/Contact.vue";
 import Wishlist from "@/views/Wishlist.vue";
+import Order from "@/views/order.vue";
 
 const routes = [
   {
@@ -105,6 +106,12 @@ const routes = [
     path: "/networkError",
     name: "networkError",
     component: NetworkError,
+  },
+  {
+    path: "/order",
+    name: "order",
+    component: Order,
+    meta: { requiresAuth: true },
   },
 ];
 

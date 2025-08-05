@@ -164,6 +164,15 @@
         </div>
       </div>
     </div>
+    <div class="mt-4 flex items-center space-x-2">
+      <AppIcon icon="line-md:arrow-left" class="w-4 h-4" />
+      <router-link
+        to="/products"
+        class="text-[#10203f] hover:text-[#1e3a8a] transition-colors duration-200 font-semibold underline"
+      >
+        Continue Shopping
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -201,7 +210,6 @@ const proceedToCheckout = async () => {
     };
 
     const res = await finalCart(payload);
-    console.log("✅ FinalCart API response:", res);
 
     if (res?.data?.cart_ref_id) {
       const cartId = res.data.cart_ref_id;
@@ -211,7 +219,6 @@ const proceedToCheckout = async () => {
       alert("Could not finalize cart. Try again.");
     }
   } catch (error) {
-    console.error("❌ Error finalizing cart:", error);
     alert("Could not finalize cart. Try again.");
   } finally {
     isLoading.value = false;
