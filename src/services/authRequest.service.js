@@ -1,9 +1,6 @@
-// import router from "@/router";
 import { session } from "@/utils";
-// import { useRouter } from "vue-router";
 import axios from "axios";
 
-// const router = useRouter()
 const baseUrl = process.env.VUE_APP_BASEURL;
 
 export const axiosPost = async (point, data) => {

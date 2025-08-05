@@ -152,7 +152,7 @@
 
             <!-- Register Button with Loader -->
             <button
-              class="w-full mt-2 py-3 bg-[#10203f] text-white font-medium rounded-lg hover:bg-[#ff8c4b] transition duration-300 flex items-center justify-center"
+              class="w-full mt-2 py-3 bg-[#10203f] text-white font-medium rounded-lg hover:bg-[#1e3a8a] transition duration-300 flex items-center justify-center"
               type="submit"
               :disabled="isLoading"
             >
@@ -165,7 +165,7 @@
             <div class="text-center">
               <router-link
                 to="/login"
-                class="text-sm text-gray-700 hover:underline hover:font-semibold hover:text-[#ff8c4b] transition-colors duration-300"
+                class="text-sm text-gray-700 hover:underline hover:font-semibold hover:text-[#1e3a8a] transition-colors duration-300"
               >
                 Already have an account? Login!
               </router-link>

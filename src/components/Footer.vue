@@ -96,12 +96,12 @@
         </h4>
         <div class="flex gap-4">
           <div
-            class="flex items-center justify-center w-12 h-12 bg-[#EB5E28] rounded-full shadow-md hover:bg-[#ff8c4b] transition-colors duration-300"
+            class="flex items-center justify-center w-12 h-12 bg-[#10203f] rounded-full shadow-md hover:bg-[#1e3a8a] transition-colors duration-300"
           >
             <AppIcon icon="mdi:instagram" class="w-6 h-6 text-white" />
           </div>
           <div
-            class="flex items-center justify-center w-12 h-12 bg-[#EB5E28] rounded-full shadow-md hover:bg-[#ff8c4b] transition-colors duration-300"
+            class="flex items-center justify-center w-12 h-12 bg-[#10203f] rounded-full shadow-md hover:bg-[#1e3a8a] transition-colors duration-300"
           >
             <AppIcon
               icon="grommet-icons:facebook-option"
@@ -109,7 +109,7 @@
             />
           </div>
           <div
-            class="flex items-center justify-center w-12 h-12 bg-[#EB5E28] rounded-full shadow-md hover:bg-[#ff8c4b] transition-colors duration-300"
+            class="flex items-center justify-center w-12 h-12 bg-[#10203f] rounded-full shadow-md hover:bg-[#1e3a8a] transition-colors duration-300"
           >
             <AppIcon icon="ri:twitter-x-line" class="w-6 h-6 text-white" />
           </div>

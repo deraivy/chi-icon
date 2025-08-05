@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { useFavouriteStore } from "@/store/wishlistStore";
+import { useCartStore } from "@/store/cartStore";
 import { session } from "../utils/index";
 import Home from "../views/Home.vue";
 import Login from "../views/Auth/Login.vue";
@@ -74,6 +75,7 @@ const routes = [
     path: "/cart",
     name: "cart",
     component: Cart,
+    meta: { requiresAuth: true },
   },
   {
     path: "/search",
@@ -84,6 +86,7 @@ const routes = [
     path: "/checkout",
     name: "checkout",
     component: Checkout,
+    meta: { requiresAuth: true },
   },
 
   {
@@ -128,11 +131,15 @@ router.beforeEach(async (to, from, next) => {
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
   const sessionData = session.get("sessionData");
   const favouriteStore = useFavouriteStore();
+  const cartStore = useCartStore();
 
   if (requiresAuth && !sessionData) {
     return next({ name: "login" });
   }
 
+  if (sessionData && cartStore.cartItems.length === 0 && !cartStore.onLoading) {
+    await cartStore.fetchCart();
+  }
   if (
     sessionData &&
     favouriteStore.favourites.length === 0 &&

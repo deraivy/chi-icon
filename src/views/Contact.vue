@@ -56,7 +56,7 @@
 
                 <a target="blank" class="text-sm ml-3">
                   <small class="block">Mail</small>
-                  <strong class="text-base">chiicon@gmail.com</strong>
+                  <strong class="text-base">chiicon158@gmail.com</strong>
                 </a>
               </li>
 
@@ -72,7 +72,7 @@
 
                 <a target="blank" class="text-sm ml-3">
                   <small class="block">Phone</small>
-                  <strong class="text-base">0913456793</strong>
+                  <strong class="text-base">08171951214</strong>
                 </a>
               </li>
             </ul>

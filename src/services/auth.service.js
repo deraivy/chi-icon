@@ -58,6 +58,14 @@ export const finalCart = async (data) => {
   return await axiosPost("/api/v1/products/finalize_cart", data);
 };
 
-// export const getfinalCart = async (data) => {
-//   return await axiosPost("api/v1/products/get_finalized_carts", data);
-// };
+export const getfinalCart = async (id) => {
+  return await axiosGet(`/api/v1/products/get_finalized_carts/${id}`);
+};
+
+export const getAddress = async (data) => {
+  return await axiosGet("/api/v1/products/order_address", data);
+};
+
+export const verifyPayment = async (data) => {
+  return await axiosPost("/api/v1/products/verify_payment", data);
+};

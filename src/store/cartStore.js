@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 
 export const useCartStore = defineStore("cart", {
   state: () => ({
-    cartItems: JSON.parse(sessionStorage.getItem("cartItems")) || [],
+    cartItems: JSON.parse(localStorage.getItem("cartItems")) || [],
   }),
 
   getters: {
@@ -58,17 +58,20 @@ export const useCartStore = defineStore("cart", {
     },
 
     saveCart() {
-      sessionStorage.setItem("cartItems", JSON.stringify(this.cartItems));
+      localStorage.setItem("cartItems", JSON.stringify(this.cartItems));
     },
 
-    clearCart() {
-      this.cartItems = [];
-      this.saveCart();
-    },
+    // clearCart() {
+    //   this.cartItems = [];
+    //   this.saveCart();
+    // },
 
     fetchCart() {
-      this.cartItems = JSON.parse(sessionStorage.getItem("cartItems")) || [];
-      console.log("Fetched cart:", this.cartItems);
+      this.cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    },
+    clearCart() {
+      this.cartItems = [];
+      localStorage.removeItem("cartItems");
     },
   },
 });

@@ -135,6 +135,7 @@ function addToFavourite() {
   }
 
   favouriteStore.toggleFavourite(props.product);
+  toast.success(`${props.product.name} added to favourites!`);
 }
 
 function goToDetails() {

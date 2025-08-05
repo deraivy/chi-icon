@@ -3,7 +3,7 @@
     <div class="flex justify-between items-center py-2 container mx-auto px-4">
       <div class="flex items-center space-x-2">
         <AppIcon icon="line-md:phone" class="w-4 h-4" />
-        <p>09136230385</p>
+        <p>08171951214</p>
       </div>
 
       <div class="flex items-center space-x-3">
@@ -28,7 +28,7 @@
     </div>
   </header>
 
-  <div class="bg-white sticky top-0 z-50">
+  <div class="bg-white sticky top-0 z-50 border-b border-gray-200 shadow-sm">
     <div class="w-full container mx-auto px-4">
       <nav class="flex justify-between items-center py-4 h-18">
         <div class="flex items-center space-x-6">
@@ -76,7 +76,7 @@
           <!-- Search -->
           <button
             @click="isSearchModalOpen = true"
-            class="text-gray-700 hover:text-[#EB5E28] transition-colors duration-200"
+            class="text-gray-700 hover:text-red-500 transition-colors duration-200"
             aria-label="Search"
           >
             <AppIcon icon="ph:magnifying-glass-bold" class="w-7 h-7" />
@@ -90,10 +90,10 @@
           >
             <AppIcon
               icon="akar-icons:shopping-bag"
-              class="w-7 h-7 text-gray-800 group-hover:text-[#EB5E28] transition-colors duration-200"
+              class="w-7 h-7 text-gray-800 group-hover:text-red-500 transition-colors duration-200"
             />
             <span
-              class="absolute -top-1 -right-1 bg-[#EB5E28] text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center"
+              class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center"
             >
               {{ cartCount }}
             </span>
@@ -107,10 +107,10 @@
           >
             <AppIcon
               icon="icon-park-outline:like"
-              class="w-7 h-7 text-gray-800 group-hover:text-[#EB5E28] transition-colors duration-200"
+              class="w-7 h-7 text-gray-800 group-hover:text-red-500 transition-colors duration-200"
             />
             <span
-              class="absolute -top-1 -right-1 bg-[#EB5E28] text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center"
+              class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center"
             >
               {{ favouriteCount }}
             </span>
@@ -120,7 +120,7 @@
           <button
             v-if="!drawer"
             @click="openDrawer"
-            class="md:hidden text-gray-700 hover:text-[#EB5E28] transition-colors duration-200"
+            class="md:hidden text-gray-700 hover:text-red-500 transition-colors duration-200"
             aria-label="Open Menu"
           >
             <AppIcon

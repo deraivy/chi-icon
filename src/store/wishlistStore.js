@@ -12,7 +12,6 @@ export const useFavouriteStore = defineStore("wishlist", {
       try {
         const response = await allfavourites();
         const data = response.data;
-        console.log("Favorites response:", data);
         this.favourites = (data?.favorites || []).map((fav) => fav.product);
       } catch (error) {
         console.error("Error fetching favourites:", error);

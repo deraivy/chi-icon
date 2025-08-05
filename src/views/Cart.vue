@@ -149,13 +149,17 @@
               <span class="font-semibold">Total</span>
               <span class="font-semibold">₦{{ cartTotal.toFixed(2) }}</span>
             </div>
-            <router-link to="/checkout">
-              <button
-                class="bg-[#10203f] text-white py-2 px-4 rounded-lg mt-4 w-full text-sm sm:text-base"
-              >
-                Checkout
-              </button>
-            </router-link>
+            <button
+              @click="proceedToCheckout"
+              :disabled="isLoading"
+              class="bg-[#10203f] text-white py-2 px-4 rounded-lg mt-4 w-full text-sm sm:text-base flex justify-center items-center gap-2"
+            >
+              <span v-if="!isLoading">Proceed to Checkout</span>
+              <div
+                v-else
+                class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"
+              ></div>
+            </button>
           </div>
         </div>
       </div>
@@ -164,12 +168,18 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useCartStore } from "@/store/cartStore";
+import { finalCart } from "../services/auth.service";
+import { useRouter } from "vue-router";
+import { session } from "@/utils";
+import { onMounted } from "vue";
 
+const router = useRouter();
 const cartStore = useCartStore();
 const { cartItems, cartTotal } = storeToRefs(cartStore);
-
+const isLoading = ref(false);
 const updateQuantity = (productId, quantity) => {
   if (quantity >= 1) {
     cartStore.updateQuantity(productId, quantity);
@@ -179,4 +189,56 @@ const updateQuantity = (productId, quantity) => {
 const removeFromCart = (productId) => {
   cartStore.removeFromCart(productId);
 };
+
+const proceedToCheckout = async () => {
+  isLoading.value = true;
+  try {
+    const payload = {
+      products: cartItems.value.map((item) => ({
+        product_id: item.product.id,
+        quantity: item.quantity,
+      })),
+    };
+
+    const res = await finalCart(payload);
+    console.log("✅ FinalCart API response:", res);
+
+    if (res?.data?.cart_ref_id) {
+      const cartId = res.data.cart_ref_id;
+      localStorage.setItem("finalizedCartId", cartId);
+      router.push({ name: "checkout", query: { cartId } });
+    } else {
+      alert("Could not finalize cart. Try again.");
+    }
+  } catch (error) {
+    console.error("❌ Error finalizing cart:", error);
+    alert("Could not finalize cart. Try again.");
+  } finally {
+    isLoading.value = false;
+  }
+};
+
+onMounted(() => {
+  const sessionData = session.get("sessionData");
+  if (sessionData) {
+    cartStore.fetchCart();
+  } else {
+    cartStore.cartItems = [];
+  }
+});
 </script>
+<style scoped>
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out;
+}
+</style>
